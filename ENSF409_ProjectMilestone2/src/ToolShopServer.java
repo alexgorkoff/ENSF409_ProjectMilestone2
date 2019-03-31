@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 public class ToolShopServer {
 	
 	private ServerSocket serverSocket;
-	private Socket aSocket;
 	private ExecutorService pool;
 	
 
@@ -25,7 +24,7 @@ public class ToolShopServer {
 			while(true) {
 				FrontEnd application = new FrontEnd(serverSocket.accept());
 				
-				System.out.println("Welcome to the Store!");
+				System.out.println("New Customer! Welcome to the Store!");
 				
 				pool.execute(application);
 			}
@@ -33,10 +32,6 @@ public class ToolShopServer {
 			e.printStackTrace();
 			pool.shutdown();
 		}
-
-		
-		
-		
 	}
 	
 	

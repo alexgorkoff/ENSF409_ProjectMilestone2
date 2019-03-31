@@ -36,17 +36,17 @@ public class Order {
 		this.orderId = orderId;
 	}
 	public String toString (){
-		String order = "Order Date: " + today.toString() + "\n\n";
+		String order = "\nOrder Date: " + today.toString() + "\n\n";
 		String str = "";
 		for (OrderLine ol: orderLines) {
 			str += ol;
 			str += "------------------------\n";
 		}
 		if (str == "")
-			str = "here are corrently no orderlines";
+			str = "There are currently no OrderLines to print.";
 		
 		order += str;
-		order += "\n";
+		//order += "\n";
 		return order;
 	}
 

@@ -22,13 +22,25 @@ public class SocketPack {
 		}	
 	}
 	
+	public SocketPack(Socket theSocket) {
+		
+		aSocket = theSocket;
+		
+		try {
+			socketIn = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
+			socketOut = new PrintWriter(theSocket.getOutputStream());
+		} catch(Exception e) {
+			System.err.println("Failed to initialize Front End");
+		}
+	}
+	
 	public void sendStringPrint(String toSend) {
 		socketOut.print(toSend);
 		socketOut.flush();
 	}
 	
 	public void sendStringPrintln(String toSend) {
-		socketOut.print(toSend);
+		socketOut.println(toSend);
 		socketOut.flush();
 	}
 	
