@@ -4,13 +4,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientSocket {
+public class SocketPack {
 	private PrintWriter socketOut;
 	private Socket aSocket;
 	private BufferedReader stdIn;
 	private BufferedReader socketIn;
 	
-	public ClientSocket(String serverName, int portNumber) {
+	public SocketPack(String serverName, int portNumber) {
 		
 		try {
 			aSocket = new Socket(serverName, portNumber);
@@ -32,16 +32,32 @@ public class ClientSocket {
 		socketOut.flush();
 	}
 	
+	public void setSocketOut(PrintWriter socketOut) {
+		this.socketOut = socketOut;
+	}
+	
 	public PrintWriter getSocketOut() {
 		return socketOut;
+	}
+	
+	public void setASocket(Socket aSocket) {
+		this.aSocket = aSocket;
 	}
 	
 	public Socket getASocket() {
 		return aSocket;
 	}
 	
+	public void setStdIn(BufferedReader stdIn) {
+		this.stdIn = stdIn;
+	}
+	
 	public BufferedReader getStdIn() {
 		return stdIn;
+	}
+	
+	public void setSocketIn(BufferedReader socketIn) {
+		this.socketIn = socketIn;
 	}
 	
 	public BufferedReader getSocketIn() {

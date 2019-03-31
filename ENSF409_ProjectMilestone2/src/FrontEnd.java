@@ -1,20 +1,33 @@
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FrontEnd {
+public class FrontEnd implements Runnable {
 
 	private ArrayList<Supplier> suppliers;
 	private Inventory theInventory;
 	private Shop theShop;
 	private Scanner scan;
+	
+	private SocketPack customerSockets;
 
-	FrontEnd() {
+	FrontEnd(Socket theSocket) {
 		suppliers = new ArrayList<Supplier>();
 		readSuppliers();
 		theInventory = new Inventory(readItems());
 		theShop = new Shop(theInventory, suppliers);
 		scan = new Scanner(System.in);
+		
+		customerSockets.setASocket(theSocket);
+		
+		try {
+			customerSockets.setSocketIn(new BufferedReader(new InputStreamReader(theSocket.getInputStream())));
+			customerSockets.setSocketOut(new PrintWriter(theSocket.getOutputStream()));
+		} catch(Exception e) {
+			System.err.println("Failed to initialize Front End");
+		}
 	}
 
 	private ArrayList<Item> readItems() {
@@ -79,31 +92,32 @@ public class FrontEnd {
 	}
 
 	private void printMenuChoices() {
-		System.out.println("Please choose from one of the following options: ");
-		System.out.println("1. List all tools in the inventory.");
-		System.out.println("2. Search for tool by tool name.");
-		System.out.println("3. Search for tool by tool id.");
-		System.out.println("4. Check item quantity.");
-		System.out.println("5. Decrease item quantity.");
-		System.out.println("6. Print today's order.");
-		System.out.println("7. Quit.");
-		System.out.println();
-		System.out.print("Please enter your selection: ");
+		customerSockets.sendStringPrintln("Please choose from one of the following options: ");
+		customerSockets.sendStringPrintln("1. List all tools in the inventory.");
+		customerSockets.sendStringPrintln("2. Search for tool by tool name.");
+		customerSockets.sendStringPrintln("3. Search for tool by tool id.");
+		customerSockets.sendStringPrintln("4. Check item quantity.");
+		customerSockets.sendStringPrintln("5. Decrease item quantity.");
+		customerSockets.sendStringPrintln("6. Print today's order.");
+		customerSockets.sendStringPrintln("7. Quit.");
+		customerSockets.sendStringPrintln("");
+		customerSockets.sendStringPrintln("Please enter your selection: ");
 	}
 
-	public void menu() {
+	public void menu() throws NumberFormatException, IOException {
 
 		while (true) {
 
 			printMenuChoices();
 
-			int choice = scan.nextInt();
-			scan.nextLine();
+			//int choice = scan.nextInt();
+			int choice = Integer.parseInt(customerSockets.getSocketIn().readLine() + "\0");
+			//scan.nextLine();
 
 			switch (choice) {
 
 			case 1:
-				theShop.listAllItems();
+				theShop.listAllItems(customerSockets);
 				break;
 			case 2:
 				searchForItemByName();
@@ -121,10 +135,10 @@ public class FrontEnd {
 				printOrder();
 				break;
 			case 7:
-				System.out.println("\nGood Bye!");
+				customerSockets.sendStringPrintln("\nGood Bye!");
 				return;
 			default:
-				System.out.println("\nInvalid selection Please try again!");
+				customerSockets.sendStringPrintln("\nInvalid selection Please try again!");
 				break;
 
 			}
@@ -134,52 +148,61 @@ public class FrontEnd {
 	}
 
 	private void printOrder() {
-		System.out.println(theShop.printOrder());
+		customerSockets.sendStringPrintln(theShop.printOrder());
+		//Need to pass along customer sockets
 	}
 
-	private void decreaseItem() {
+	private void decreaseItem() throws IOException {
 		String name = getItemName();
-		System.out.println(theShop.decreaseItem(name));
+		customerSockets.sendStringPrintln(theShop.decreaseItem(name));
 	}
 
-	private void checkItemQuantity() {
+	private void checkItemQuantity() throws IOException {
 		String name = getItemName();
-		System.out.println(theShop.getItemQuantity(name));
+		customerSockets.sendStringPrintln(theShop.getItemQuantity(name));
 	}
 
-	private String getItemName() {
-		System.out.print("Please enter the name of the item: ");
-
-		String line = scan.nextLine();
+	private String getItemName() throws IOException {
+		customerSockets.sendStringPrint("Please enter the name of the item: ");
+		String line = customerSockets.getSocketIn().readLine() + "\0";
 		return line;
 
 	}
 
-	private int getItemId() {
-		System.out.print("Please enter the ID number of the item: ");
-		return scan.nextInt();
+	private int getItemId() throws NumberFormatException, IOException {
+		customerSockets.sendStringPrintln("Please enter the ID number of the item: ");
+		
+		int itemID = Integer.parseInt(customerSockets.getSocketIn().readLine() + "\0");
+		
+		return itemID;
 	}
 
-	private void searchForItemById() {
-		// TODO Auto-generated method stub
+	private void searchForItemById() throws NumberFormatException, IOException {
+
 		int id = getItemId();
-		System.out.println(theShop.getItem(id));
+		customerSockets.sendStringPrintln(theShop.getItem(id));
 
 	}
 
-	private void searchForItemByName() {
-		// TODO Auto-generated method stub
+	private void searchForItemByName() throws IOException {
 
 		String name = getItemName();
-		System.out.println(theShop.getItem(name));
+		customerSockets.sendStringPrintln(theShop.getItem(name));
 
 	}
 
-	public static void main(String[] args) {
-
-		FrontEnd app = new FrontEnd();
-		app.menu();
-
+	@Override
+	public void run() {
+		
+		try {
+			this.menu();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

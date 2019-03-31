@@ -25,9 +25,8 @@ public class Shop {
 		supplierList = suppliers;
 	}
 	
-
-	public void listAllItems() {
-		System.out.println(theInventory);
+	public void listAllItems(SocketPack customerSockets) {
+		customerSockets.sendStringPrintln(theInventory.toString());
 		
 	}
 	public String decreaseItem (String name) {
@@ -37,10 +36,10 @@ public class Shop {
 			return "Item quantity was decreased!\n";
 	}
 
-	public void listAllSuppliers() {
+	public void listAllSuppliers(SocketPack customerSockets) {
 		// TODO Auto-generated method stub
 		for (Supplier s: supplierList) {
-			System.out.println(s);
+			customerSockets.sendStringPrintln(s.toString());
 		}
 		
 	}

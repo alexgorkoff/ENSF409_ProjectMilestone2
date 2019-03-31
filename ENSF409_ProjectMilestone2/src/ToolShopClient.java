@@ -2,10 +2,10 @@ import java.io.IOException;
 
 public class ToolShopClient {
 	
-	private ClientSocket clientSockets;
+	private SocketPack clientSockets;
 	
 	public ToolShopClient(String portName, int portNumber) {
-		clientSockets = new ClientSocket(portName, portNumber);
+		clientSockets = new SocketPack(portName, portNumber);
 	}
 	
 	public void communicateServer() {
