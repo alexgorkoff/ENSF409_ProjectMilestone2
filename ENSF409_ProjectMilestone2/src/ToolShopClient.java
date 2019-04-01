@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class ToolShopClient {
 	
@@ -45,11 +47,10 @@ public class ToolShopClient {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
 	}
 	
-	public static void main(String [] args) {
+	public static void main(String [] args) throws UnknownHostException {
 		ToolShopClient toolShopClient = new ToolShopClient("localhost", 8099);
 		toolShopClient.communicateServer();
 	}
