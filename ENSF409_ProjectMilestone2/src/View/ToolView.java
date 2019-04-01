@@ -129,8 +129,8 @@ public class ToolView extends JFrame {
 		centrePanel.add(listTool);
 		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
 		centrePanel.add(quit);
-
 	}
+
 
 	public void addNorthComp() {
 		try {
@@ -143,7 +143,7 @@ public class ToolView extends JFrame {
 		northPanel.add(logo);
 	}
 
-	public void addWestComp() {
+	public void addWestComp() {		
 		try {
 			BufferedImage quantityImage = ImageIO.read(new FileInputStream("resources/quantityimage.png"));
 			quantityLogo = new JLabel(new ImageIcon(quantityImage));
@@ -173,19 +173,15 @@ public class ToolView extends JFrame {
 	public void addQuitListener(GUIListener.QuitListener listenQuit) {
 		quit.addActionListener(listenQuit);
 	}
-
 	public void addQuantityListener(GUIListener.QuantityListener listenQuantity) {
 		quantityCheck.addActionListener(listenQuantity);
 	}
-
 	public void addReduceListener(GUIListener.ReduceListener listenReduce) {
 		buyItem.addActionListener(listenReduce);
 	}
-
 	public void addListListener(GUIListener.ListListener listenList) {
 		listTool.addActionListener(listenList);
 	}
-
 	public void addSearchListener(GUIListener.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
 	}
@@ -205,20 +201,13 @@ public class ToolView extends JFrame {
 		return Integer.parseInt(search.getText());
 	}
 
-	public void getCheckBox() {
-		if (idSelect.isSelected()) {
-			System.out.println("Search via ID");
-		} else if (nameSelect.isSelected()) {
-			System.out.println("Search via NAME");
-		}
+	public static void main(String[] args) {
+		ToolView GUI = new ToolView();
+		GUIListener listeners = new GUIListener(GUI);
 	}
 
 	public JFrame getFrame() {
 		return myFrame;
 	}
 
-	public static void main(String[] args) {
-		ToolView GUI = new ToolView();
-		GUIListener listeners = new GUIListener(GUI);
-	}
 }
