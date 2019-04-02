@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import Controller.*;
-
+//HELLO GUYS
 public class ToolView extends JFrame {
 	private JFrame myFrame;
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel;
@@ -97,14 +97,14 @@ public class ToolView extends JFrame {
 	}
 
 	public void createSearchPanel() {
-		try {
-			BufferedImage searchPic = ImageIO.read(new FileInputStream("resources/searchimage.png"));
-			searchLogo = new JLabel(new ImageIcon(searchPic));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		searchPanel.add(searchLogo, BorderLayout.NORTH);
-		searchPanel.add(search, BorderLayout.NORTH);
+//		try {
+//			BufferedImage searchPic = ImageIO.read(new FileInputStream("resources/searchimage.png"));
+//			searchLogo = new JLabel(new ImageIcon(searchPic));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		searchPanel.add(searchLogo, BorderLayout.NORTH);
+//		searchPanel.add(search, BorderLayout.NORTH);
 		searchPanel.add(idSearch, BorderLayout.NORTH);
 	}
 
@@ -133,37 +133,37 @@ public class ToolView extends JFrame {
 
 
 	public void addNorthComp() {
-		try {
-			BufferedImage logoPic = ImageIO.read(new FileInputStream("resources/toolimage.png"));
-			logo = new JLabel(new ImageIcon(logoPic));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		northPanel.add(title);
-		northPanel.add(logo);
+//		try {
+//			BufferedImage logoPic = ImageIO.read(new FileInputStream("resources/toolimage.png"));
+//			logo = new JLabel(new ImageIcon(logoPic));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		northPanel.add(title);
+//		northPanel.add(logo);
 	}
 
 	public void addWestComp() {		
-		try {
-			BufferedImage quantityImage = ImageIO.read(new FileInputStream("resources/quantityimage.png"));
-			quantityLogo = new JLabel(new ImageIcon(quantityImage));
-			BufferedImage reduceImage = ImageIO.read(new FileInputStream("resources/reduceimage.png"));
-			reduceLogo = new JLabel(new ImageIcon(reduceImage));
-			BufferedImage listImage = ImageIO.read(new FileInputStream("resources/listimage.png"));
-			listLogo = new JLabel(new ImageIcon(listImage));
-			BufferedImage quitImage = ImageIO.read(new FileInputStream("resources/quitimage.png"));
-			quitLogo = new JLabel(new ImageIcon(quitImage));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		westPanel.add(Box.createRigidArea(new Dimension(0, 100)));
-		westPanel.add(quantityLogo);
-		westPanel.add(Box.createRigidArea(new Dimension(0, 90)));
-		westPanel.add(reduceLogo);
-		westPanel.add(Box.createRigidArea(new Dimension(0, 70)));
-		westPanel.add(listLogo);
-		westPanel.add(Box.createRigidArea(new Dimension(0, 70)));
-		westPanel.add(quitLogo);
+//		try {
+//			BufferedImage quantityImage = ImageIO.read(new FileInputStream("resources/quantityimage.png"));
+//			quantityLogo = new JLabel(new ImageIcon(quantityImage));
+//			BufferedImage reduceImage = ImageIO.read(new FileInputStream("resources/reduceimage.png"));
+//			reduceLogo = new JLabel(new ImageIcon(reduceImage));
+//			BufferedImage listImage = ImageIO.read(new FileInputStream("resources/listimage.png"));
+//			listLogo = new JLabel(new ImageIcon(listImage));
+//			BufferedImage quitImage = ImageIO.read(new FileInputStream("resources/quitimage.png"));
+//			quitLogo = new JLabel(new ImageIcon(quitImage));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		westPanel.add(Box.createRigidArea(new Dimension(0, 100)));
+//		westPanel.add(quantityLogo);
+//		westPanel.add(Box.createRigidArea(new Dimension(0, 90)));
+//		westPanel.add(reduceLogo);
+//		westPanel.add(Box.createRigidArea(new Dimension(0, 70)));
+//		westPanel.add(listLogo);
+//		westPanel.add(Box.createRigidArea(new Dimension(0, 70)));
+//		westPanel.add(quitLogo);
 	}
 
 	public void addEastComp() {
