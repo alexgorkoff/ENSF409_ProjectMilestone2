@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import Controller.*;
-//HELLO GUYS how are you??
+
 public class ToolView extends JFrame {
 	private JFrame myFrame;
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel;
@@ -19,7 +19,6 @@ public class ToolView extends JFrame {
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
 			quitLogo, reduceLogo;
 	private JTextField search;
-	private Font bodyFont;
 	private JCheckBox idSelect;
 	private JCheckBox nameSelect;
 
@@ -30,37 +29,6 @@ public class ToolView extends JFrame {
 	 */
 	public ToolView() {
 		myFrame.setDefaultLookAndFeelDecorated(true);
-		bodyFont = new Font("Serif", Font.PLAIN, 30);
-		idSearch = new JButton("Search");
-		quantityCheck = new JButton("Check Tool Quantity");
-		buyItem = new JButton("Reduce Quantity");
-		quit = new JButton("Quit Program");
-		listTool = new JButton("List All Tools");
-		idSelect = new JCheckBox();
-		nameSelect = new JCheckBox();
-		title = new JLabel("Welcome To The Tool Inventory Manager");
-		SearchLabel = new JLabel("Search");
-		searchNameLabel = new JLabel(" Search by Name ");
-		searchIDLabel = new JLabel("Search by ID ");
-		logo = new JLabel();
-		searchLogo = new JLabel();
-		setTitleFont();
-		search = new JTextField(15);
-		southPanel = new JPanel();
-		searchPanel = new JPanel();
-		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
-		checkBoxPanel = new JPanel();
-		checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.X_AXIS));
-		centrePanel = new JPanel();
-		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
-		northPanel = new JPanel();
-		eastPanel = new JPanel();
-		westPanel = new JPanel();
-		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
-		myFrame = new JFrame();
-		setTextFieldSize();
-		setBodyFont();
-		setButtonSize();
 		createSearchPanel();
 		createCheckBox();
 		addSouthComp();
@@ -68,11 +36,15 @@ public class ToolView extends JFrame {
 		addNorthComp();
 		addEastComp();
 		addWestComp();
+		setTitleFont();
+		setBodyFont();
+		setTextFieldSize();
+		setButtonSize();
 		drawFrame();
 	}
 
 	public void setBodyFont() {
-
+		Font bodyFont = new Font("Serif", Font.PLAIN, 30);
 	}
 
 	public void setTextFieldSize() {
@@ -102,6 +74,11 @@ public class ToolView extends JFrame {
 	}
 
 	public void createSearchPanel() {
+		searchPanel = new JPanel();
+		search = new JTextField(15);
+		searchLogo = new JLabel();
+		idSearch = new JButton("Search");
+		SearchLabel = new JLabel("Search");
 //		try {
 //			BufferedImage searchPic = ImageIO.read(new FileInputStream("resources/searchimage.png"));
 //			searchLogo = new JLabel(new ImageIcon(searchPic));
@@ -109,11 +86,17 @@ public class ToolView extends JFrame {
 //			e.printStackTrace();
 //		}
 //		searchPanel.add(searchLogo, BorderLayout.NORTH);
-//		searchPanel.add(search, BorderLayout.NORTH);
+		searchPanel.add(search, BorderLayout.NORTH);
 		searchPanel.add(idSearch, BorderLayout.NORTH);
 	}
 
 	public void createCheckBox() {
+		checkBoxPanel = new JPanel();
+		idSelect = new JCheckBox();
+		nameSelect = new JCheckBox();
+		searchNameLabel = new JLabel(" Search by Name ");
+		searchIDLabel = new JLabel("Search by ID ");
+		checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.X_AXIS));
 		checkBoxPanel.add(searchIDLabel);
 		checkBoxPanel.add(idSelect);
 		checkBoxPanel.add(searchNameLabel);
@@ -121,11 +104,19 @@ public class ToolView extends JFrame {
 	}
 
 	public void addSouthComp() {
+		southPanel = new JPanel();
+		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
 		southPanel.add(searchPanel);
 		southPanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
 
 	public void addCentreComp() {
+		centrePanel = new JPanel();
+		listTool = new JButton("List All Tools");
+		quantityCheck = new JButton("Check Tool Quantity");
+		buyItem = new JButton("Reduce Quantity");
+		quit = new JButton("Quit Program");
+		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
 		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
 		centrePanel.add(quantityCheck);
 		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
@@ -138,17 +129,22 @@ public class ToolView extends JFrame {
 
 
 	public void addNorthComp() {
+		title = new JLabel("Welcome To The Tool Inventory Manager");
+		northPanel = new JPanel();
+		logo = new JLabel();
 //		try {
 //			BufferedImage logoPic = ImageIO.read(new FileInputStream("resources/toolimage.png"));
 //			logo = new JLabel(new ImageIcon(logoPic));
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-//		northPanel.add(title);
+		northPanel.add(title);
 //		northPanel.add(logo);
 	}
 
-	public void addWestComp() {		
+	public void addWestComp() {	
+		westPanel = new JPanel();
+		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
 //		try {
 //			BufferedImage quantityImage = ImageIO.read(new FileInputStream("resources/quantityimage.png"));
 //			quantityLogo = new JLabel(new ImageIcon(quantityImage));
@@ -172,7 +168,7 @@ public class ToolView extends JFrame {
 	}
 
 	public void addEastComp() {
-
+		eastPanel = new JPanel();
 	}
 
 	public void addQuitListener(GUIListener.QuitListener listenQuit) {
@@ -192,6 +188,7 @@ public class ToolView extends JFrame {
 	}
 
 	public void drawFrame() {
+		myFrame = new JFrame();
 		myFrame.add(southPanel, BorderLayout.SOUTH);
 		myFrame.add(centrePanel, BorderLayout.CENTER);
 		myFrame.add(northPanel, BorderLayout.NORTH);
