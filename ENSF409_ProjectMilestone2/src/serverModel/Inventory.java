@@ -13,7 +13,14 @@ import java.util.ArrayList;
  */
 public class Inventory {
 	
+	/**
+	 * List containing all the items in the inventory
+	 */
 	private ArrayList <Item> itemList;
+	
+	/**
+	 * Order generated during a program session
+	 */
 	private Order myOrder;
 	
 	/**
