@@ -217,7 +217,7 @@ public class ToolView extends JFrame {
 	}
 
 	public void drawFrame() {
-		myFrame = new JFrame();
+		myFrame = new JFrame("WELCOME");
 		myFrame.add(southPanel, BorderLayout.SOUTH);
 		myFrame.add(centrePanel, BorderLayout.CENTER);
 		myFrame.add(northPanel, BorderLayout.NORTH);
