@@ -25,7 +25,7 @@ public class ToolShopServer {
 	public void communicateWithClient() throws IOException {
 		try {
 			while(true) {
-				FrontEnd customer = new FrontEnd(serverSocket.accept());
+				ServerController customer = new ServerController(serverSocket.accept());
 				
 				System.out.println("New Customer! Welcome to the Store!");
 				
