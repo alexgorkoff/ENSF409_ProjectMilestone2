@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
-import GUI.ListListener;
 import clientController.*;
 
 public class ToolView extends JFrame {
@@ -148,8 +147,6 @@ public class ToolView extends JFrame {
 		centrePanel = new JPanel();
 		scrollPanel = new JScrollPane(listArea);
 		centrePanel.add(scrollPanel);
-		// centrePanel.add(centrePanel, BorderLayout.SOUTH);
-		// centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
 
 	public void addNorthComp() {
