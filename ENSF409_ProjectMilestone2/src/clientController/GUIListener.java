@@ -16,10 +16,11 @@ public class GUIListener {
 		myView.addQuitListener(new QuitListener());
 		myView.addQuantityListener(new QuantityListener());
 		myView.addReduceListener(new ReduceListener());
-		myView.addListListener(new ListListener());
+		myView.addListActionListener(new ListActionListener());
 		myView.addSearchListener(new SearchListener());
-
+		myView.addListListener(new ListListener());
 	}
+
 	public class ListListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			int index = myView.getListArea().getSelectedIndex();
@@ -28,6 +29,15 @@ public class GUIListener {
 				myView.getSelectedTextField().setText(line);
 			}
 		}
+	}
+
+	public class ListActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+
+		}
+
 	}
 
 	public class QuantityListener implements ActionListener {
@@ -46,15 +56,6 @@ public class GUIListener {
 		public void actionPerformed(ActionEvent e) {
 			// reduceQuantity();
 			JOptionPane.showMessageDialog(null, "Quantity Reduced by 1");
-		}
-
-	}
-
-	public class ListListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// getAllTools();
 		}
 
 	}

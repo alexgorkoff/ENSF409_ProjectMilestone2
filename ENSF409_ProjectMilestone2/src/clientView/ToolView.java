@@ -16,7 +16,7 @@ import clientController.*;
 
 public class ToolView extends JFrame {
 	private JFrame myFrame;
-	private JPanel southPanel, panelForScroll, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
+	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
 			searchAndCheckBox;
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
@@ -145,9 +145,9 @@ public class ToolView extends JFrame {
 
 	public void addCentreComp() {
 		initList();
-		panelForScroll = new JPanel();
+		centrePanel = new JPanel();
 		scrollPanel = new JScrollPane(listArea);
-		panelForScroll.add(centrePanel);
+		centrePanel.add(scrollPanel);
 		// centrePanel.add(centrePanel, BorderLayout.SOUTH);
 		// centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
@@ -207,12 +207,16 @@ public class ToolView extends JFrame {
 		buyItem.addActionListener(listenReduce);
 	}
 
-	public void addListListener(GUIListener.ListListener listenList) {
+	public void addListActionListener(GUIListener.ListActionListener listenList) {
 		listTool.addActionListener(listenList);
 	}
 
 	public void addSearchListener(GUIListener.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
+	}
+
+	public void addListListener(GUIListener.ListListener listListen) {
+		listArea.addListSelectionListener(listListen);
 	}
 
 	public void drawFrame() {
@@ -256,6 +260,7 @@ public class ToolView extends JFrame {
 		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
 	}
+
 	public void initList() {
 		selectedTextField = new JTextField(40);
 		listModel = new DefaultListModel<String>();
@@ -264,18 +269,19 @@ public class ToolView extends JFrame {
 		listArea.setPrototypeCellValue(width);
 		listArea.setFont(new Font("Courier New", Font.BOLD, 20));
 		listArea.setVisibleRowCount(35);
-		listArea.addListSelectionListener(new ListListener());
 	}
+
 	public JList<String> getListArea() {
 		return listArea;
 	}
+
 	public DefaultListModel<String> getListModel() {
 		return listModel;
 	}
+
 	public JTextField getSelectedTextField() {
 		return selectedTextField;
 	}
-	
 
 	public static void main(String[] args) {
 		ToolView GUI = new ToolView();
