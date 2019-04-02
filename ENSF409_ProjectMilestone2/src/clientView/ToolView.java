@@ -15,7 +15,7 @@ import clientController.*;
 
 public class ToolView extends JFrame {
 	private JFrame myFrame;
-	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel;
+	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel,buttonPanel,searchAndCheckBox;
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
 			quitLogo, reduceLogo;
@@ -30,8 +30,10 @@ public class ToolView extends JFrame {
 	 */
 	public ToolView() {
 		myFrame.setDefaultLookAndFeelDecorated(true);
-		createSearchPanel();
+		createButtonPanel();
 		createCheckBox();
+		createSearchPanel();
+		searchAndCheckBox();
 		addSouthComp();
 		addCentreComp();
 		addNorthComp();
@@ -87,10 +89,15 @@ public class ToolView extends JFrame {
 //			e.printStackTrace();
 //		}
 //		searchPanel.add(searchLogo, BorderLayout.NORTH);
-		searchPanel.add(search, BorderLayout.NORTH);
-		searchPanel.add(idSearch, BorderLayout.NORTH);
+		searchPanel.add(search,BorderLayout.NORTH);
+		searchPanel.add(idSearch,BorderLayout.NORTH);
 	}
-
+	public void searchAndCheckBox() {
+		searchAndCheckBox = new JPanel();
+		searchAndCheckBox.setLayout(new BoxLayout(searchAndCheckBox, BoxLayout.Y_AXIS));
+		searchAndCheckBox.add(searchPanel);
+		searchAndCheckBox.add(checkBoxPanel);
+	}
 	public void createCheckBox() {
 		checkBoxPanel = new JPanel();
 		idSelect = new JCheckBox();
@@ -107,25 +114,32 @@ public class ToolView extends JFrame {
 	public void addSouthComp() {
 		southPanel = new JPanel();
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
-		southPanel.add(searchPanel);
-		southPanel.add(checkBoxPanel, BorderLayout.SOUTH);
-	}
+		southPanel.add(searchAndCheckBox);
+		southPanel.add(buttonPanel);
 
-	public void addCentreComp() {
-		centrePanel = new JPanel();
+	}
+	public void createButtonPanel() {
+		buttonPanel = new JPanel();
 		listTool = new JButton("List All Tools");
 		quantityCheck = new JButton("Check Tool Quantity");
 		buyItem = new JButton("Reduce Quantity");
 		quit = new JButton("Quit Program");
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(Box.createRigidArea(new Dimension(0, 0)));
+		buttonPanel.add(quantityCheck);
+		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+		buttonPanel.add(buyItem);
+		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+		buttonPanel.add(listTool);
+		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+		buttonPanel.add(quit);
+	}
+
+	public void addCentreComp() {
+		centrePanel = new JPanel();
 		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
-		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
-		centrePanel.add(quantityCheck);
-		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
-		centrePanel.add(buyItem);
-		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
-		centrePanel.add(listTool);
-		centrePanel.add(Box.createRigidArea(new Dimension(0, 100)));
-		centrePanel.add(quit);
+		//centrePanel.add(centrePanel, BorderLayout.SOUTH);
+		//centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
 
 
