@@ -19,6 +19,8 @@ public class GUIListener {
 		myView.addListActionListener(new ListActionListener());
 		myView.addSearchListener(new SearchListener());
 		myView.addListListener(new ListListener());
+		myView.addIDSelectListener(new idSearchListener());
+		myView.addNameSelectListener(new nameSearchListener());
 	}
 
 	public class ListListener implements ListSelectionListener {
@@ -34,7 +36,7 @@ public class GUIListener {
 	public class ListActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 
 	}
@@ -66,6 +68,24 @@ public class GUIListener {
 			myView.getFrame().setVisible(false); // you can't see me!
 			myView.getFrame().dispose(); // Destroy the JFrame object
 		}
+	}
+
+	public class idSearchListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			myView.setNameSelect(false);
+		}
+
+	}
+
+	public class nameSearchListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			myView.setIDSelect(false);
+		}
+
 	}
 
 	public class SearchListener implements ActionListener {

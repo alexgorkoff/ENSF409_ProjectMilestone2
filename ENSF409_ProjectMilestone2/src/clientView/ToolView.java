@@ -21,8 +21,7 @@ public class ToolView extends JFrame {
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
 			quitLogo, reduceLogo;
 	private JTextField search;
-	private JCheckBox idSelect;
-	private JCheckBox nameSelect;
+	private JCheckBox idSelect, nameSelect;
 	private JScrollPane scrollPanel;
 	private DefaultListModel<String> listModel;
 	private JList<String> listArea;
@@ -39,9 +38,9 @@ public class ToolView extends JFrame {
 		addEastComp();
 		addWestComp();
 		setTitleFont();
-		//setBodyFont();
-		//setTextFieldSize();
-		//setButtonSize();
+		// setBodyFont();
+		// setTextFieldSize();
+		// setButtonSize();
 		drawFrame();
 
 	}
@@ -131,7 +130,7 @@ public class ToolView extends JFrame {
 		quantityCheck = new JButton("Check Tool Quantity");
 		buyItem = new JButton("Reduce Quantity");
 		quit = new JButton("Quit Program");
-		
+
 		buttonPanel.setLayout(new FlowLayout());
 //		buttonPanel.add(Box.createRigidArea(new Dimension(0, 0)));
 		buttonPanel.add(quantityCheck);
@@ -217,6 +216,14 @@ public class ToolView extends JFrame {
 		listArea.addListSelectionListener(listListen);
 	}
 
+	public void addIDSelectListener(GUIListener.idSearchListener IDListen) {
+		idSelect.addActionListener(IDListen);
+	}
+
+	public void addNameSelectListener(GUIListener.nameSearchListener nameListen) {
+		nameSelect.addActionListener(nameListen);
+	}
+
 	public void drawFrame() {
 		myFrame = new JFrame("WELCOME");
 		myFrame.add(southPanel, BorderLayout.SOUTH);
@@ -280,6 +287,14 @@ public class ToolView extends JFrame {
 
 	public JTextField getSelectedTextField() {
 		return selectedTextField;
+	}
+
+	public void setNameSelect(boolean mark) {
+		nameSelect.setSelected(mark);
+	}
+
+	public void setIDSelect(boolean mark) {
+		idSelect.setSelected(mark);
 	}
 
 	public static void main(String[] args) {
