@@ -3,6 +3,17 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Class Order
+ * 
+ * @author Dr. Mohamed Moshirpour (Retrieved Sunday March 31st, 2019)
+ * Edited by: 
+ * @author Muhammad Farooq (UCID: 30016276)
+ * @author Alexander Gorkoff (UCID: 30020570)
+ * @author Matteo Messana (UCIDL 30020933)
+ *
+ */
+
 public class Order {
 	
 	

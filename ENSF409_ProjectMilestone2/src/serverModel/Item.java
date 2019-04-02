@@ -100,40 +100,82 @@ public class Item {
 	    return null;
 	}
 
+	/**
+	 * Retrieves the ID of the item
+	 * @return itemID, the ID of the item
+	 */
 	public int getItemId() {
 		return itemId;
 	}
 
+	/**
+	 * Sets the ID field for the item
+	 * @param itemId : the ID of the item
+	 */
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
+	/**
+	 * Retrieves the name of the item
+	 * @return itemName: the name of the item
+	 */
 	public String getItemName() {
 		return itemName;
 	}
 
+	/**
+	 * Sets the name field for the item
+	 * @param itemName : the name of the item
+	 */
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
+	/**
+	 * Retrieves the stock of the item
+	 * @return itemQuantity: the quantity of the item in stock
+	 */
 	public int getItemQuantity() {
 		return itemQuantity;
 	}
 
+	/**
+	 * Sets the stock field of the item
+	 * @param itemQuantity : the quantitiy of the item in stock
+	 */
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
+	/**
+	 * Retrieves the price of the item
+	 * @return itemPrice: the price of the item
+	 */
 	public double getItemPrice() {
 		return itemPrice;
 	}
 
+	/**
+	 * Sets the price field of the item
+	 * @param itemPrice : the price of the item
+	 */
 	public void setItemPrice(double itemPrice) {
 		this.itemPrice = itemPrice;
 	}
+	
+	/**
+	 * Sets the supplier field of the item
+	 * @param sup : the supplier of the item
+	 */
 	public void setTheSupplier (Supplier sup) {
 		theSupplier = sup;
 	}
+	
+	/**
+	 * Retrieves the supplier of the item
+	 * @return theSupplier: the supplier of the item
+	 */
 	public Supplier getTheSupplier () {
 		return theSupplier;
 	}
@@ -143,10 +185,18 @@ public class Item {
 	           itemQuantity + "\n";
 	}
 
+	/**
+	 * Retrieves field to determine whether or not an order has been placed for a given item
+	 * @return alreadyOrdered : boolean indicating whether or not an item has been ordered
+	 */
 	public boolean isAlreadyOrdered() {
 		return alreadyOrdered;
 	}
 
+	/**
+	 * Sets the flag of an item to indicate that an order has been placed for that item during the session
+	 * @param alreadyOrdered : boolean indicating whether or not an item has been ordered
+	 */
 	public void setAlreadyOrdered(boolean alreadyOrdered) {
 		this.alreadyOrdered = alreadyOrdered;
 	}
