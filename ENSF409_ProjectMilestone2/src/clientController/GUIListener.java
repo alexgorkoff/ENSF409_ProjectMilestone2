@@ -1,10 +1,10 @@
-package Controller;
+package clientController;
 
 import java.awt.event.*;
 
 import javax.swing.JOptionPane;
 
-import View.*;
+import clientView.*;
 
 public class GUIListener {
 	private ToolView myView;

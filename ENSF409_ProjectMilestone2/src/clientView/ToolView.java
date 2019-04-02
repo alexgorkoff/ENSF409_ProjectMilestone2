@@ -1,4 +1,4 @@
-package View;
+package clientView;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -10,7 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
-import Controller.*;
+
+import clientController.*;
 
 public class ToolView extends JFrame {
 	private JFrame myFrame;
