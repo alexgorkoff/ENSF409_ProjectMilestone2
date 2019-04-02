@@ -275,6 +275,7 @@ public class ToolView extends JFrame {
 	public JTextField getSelectedTextField() {
 		return selectedTextField;
 	}
+	
 
 	public static void main(String[] args) {
 		ToolView GUI = new ToolView();
