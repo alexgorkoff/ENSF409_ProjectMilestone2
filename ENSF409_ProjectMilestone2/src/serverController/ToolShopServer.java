@@ -1,8 +1,11 @@
+package serverController;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import serverModel.*;
 
 public class ToolShopServer {
 	
@@ -22,11 +25,11 @@ public class ToolShopServer {
 	public void communicateWithClient() throws IOException {
 		try {
 			while(true) {
-				FrontEnd application = new FrontEnd(serverSocket.accept());
+				FrontEnd customer = new FrontEnd(serverSocket.accept());
 				
 				System.out.println("New Customer! Welcome to the Store!");
 				
-				pool.execute(application);
+				pool.execute(customer);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

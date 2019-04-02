@@ -1,3 +1,4 @@
+package serverModel;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +13,7 @@ public class FrontEnd implements Runnable {
 	
 	private SocketPack customerSockets;
 
-	FrontEnd(Socket theSocket) {
+	public FrontEnd(Socket theSocket) {
 		suppliers = new ArrayList<Supplier>();
 		readSuppliers();
 		theInventory = new Inventory(readItems());
