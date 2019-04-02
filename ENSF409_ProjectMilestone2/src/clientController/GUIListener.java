@@ -3,6 +3,8 @@ package clientController;
 import java.awt.event.*;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import clientView.*;
 
@@ -17,6 +19,15 @@ public class GUIListener {
 		myView.addListListener(new ListListener());
 		myView.addSearchListener(new SearchListener());
 
+	}
+	public class ListListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent e) {
+			int index = myView.getListArea().getSelectedIndex();
+			if (index >= 0) {
+				String line = (String) myView.getListModel().get(index);
+				myView.getSelectedTextField().setText(line);
+			}
+		}
 	}
 
 	public class QuantityListener implements ActionListener {

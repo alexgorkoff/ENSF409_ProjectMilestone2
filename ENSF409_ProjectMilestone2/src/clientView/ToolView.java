@@ -11,11 +11,12 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
+import GUI.ListListener;
 import clientController.*;
 
 public class ToolView extends JFrame {
 	private JFrame myFrame;
-	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
+	private JPanel southPanel, panelForScroll, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
 			searchAndCheckBox;
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
@@ -23,6 +24,10 @@ public class ToolView extends JFrame {
 	private JTextField search;
 	private JCheckBox idSelect;
 	private JCheckBox nameSelect;
+	private JScrollPane scrollPanel;
+	private DefaultListModel<String> listModel;
+	private JList<String> listArea;
+	private JTextField selectedTextField;
 
 	/**
 	 * The constructor for the main GUI. Creates the main menu and all sub menus
@@ -139,8 +144,10 @@ public class ToolView extends JFrame {
 	}
 
 	public void addCentreComp() {
-		centrePanel = new JPanel();
-		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
+		initList();
+		panelForScroll = new JPanel();
+		scrollPanel = new JScrollPane(listArea);
+		panelForScroll.add(centrePanel);
 		// centrePanel.add(centrePanel, BorderLayout.SOUTH);
 		// centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
@@ -248,6 +255,25 @@ public class ToolView extends JFrame {
 		JLabel error = new JLabel(s);
 		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
+	}
+	public void initList() {
+		selectedTextField = new JTextField(40);
+		listModel = new DefaultListModel<String>();
+		listArea = new JList<String>(listModel);
+		String width = "1234567890123456789012345678901234567890";
+		listArea.setPrototypeCellValue(width);
+		listArea.setFont(new Font("Courier New", Font.BOLD, 20));
+		listArea.setVisibleRowCount(35);
+		listArea.addListSelectionListener(new ListListener());
+	}
+	public JList<String> getListArea() {
+		return listArea;
+	}
+	public DefaultListModel<String> getListModel() {
+		return listModel;
+	}
+	public JTextField getSelectedTextField() {
+		return selectedTextField;
 	}
 
 	public static void main(String[] args) {
