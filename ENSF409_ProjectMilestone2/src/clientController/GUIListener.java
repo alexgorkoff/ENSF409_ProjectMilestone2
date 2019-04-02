@@ -65,16 +65,15 @@ public class GUIListener {
 				try {
 					int toSearch = Integer.parseInt(myView.getSearch());
 					System.out.println("YEEE");
-				}catch(Exception notNum) {
+				} catch (Exception notNum) {
 					myView.displayErrorMessage("Please enter a numeric value for the ID");
 				}
-				//SearchID(toSearch);
+				// SearchID(toSearch);
 			} else if (myView.getCheckBox() == 1) {
 				String toSearch = myView.getSearch();
-				if(!toSearch.equals("")) {
-					//SearchName(toSearch);
-				}
-				else {
+				if (!toSearch.equals("")) {
+					// SearchName(toSearch);
+				} else {
 					myView.displayErrorMessage("Please enter a tool name");
 				}
 			} else {

@@ -15,7 +15,8 @@ import clientController.*;
 
 public class ToolView extends JFrame {
 	private JFrame myFrame;
-	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel,buttonPanel,searchAndCheckBox;
+	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
+			searchAndCheckBox;
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
 			quitLogo, reduceLogo;
@@ -24,9 +25,8 @@ public class ToolView extends JFrame {
 	private JCheckBox nameSelect;
 
 	/**
-	 * The constructor for the main GUI. 
-	 * Creates the main menu and all sub
-	 * menus stemming from the main menu
+	 * The constructor for the main GUI. Creates the main menu and all sub menus
+	 * stemming from the main menu
 	 */
 	public ToolView() {
 		myFrame.setDefaultLookAndFeelDecorated(true);
@@ -89,15 +89,17 @@ public class ToolView extends JFrame {
 //			e.printStackTrace();
 //		}
 //		searchPanel.add(searchLogo, BorderLayout.NORTH);
-		searchPanel.add(search,BorderLayout.NORTH);
-		searchPanel.add(idSearch,BorderLayout.NORTH);
+		searchPanel.add(search, BorderLayout.NORTH);
+		searchPanel.add(idSearch, BorderLayout.NORTH);
 	}
+
 	public void searchAndCheckBox() {
 		searchAndCheckBox = new JPanel();
 		searchAndCheckBox.setLayout(new BoxLayout(searchAndCheckBox, BoxLayout.Y_AXIS));
 		searchAndCheckBox.add(searchPanel);
 		searchAndCheckBox.add(checkBoxPanel);
 	}
+
 	public void createCheckBox() {
 		checkBoxPanel = new JPanel();
 		idSelect = new JCheckBox();
@@ -118,6 +120,7 @@ public class ToolView extends JFrame {
 		southPanel.add(buttonPanel);
 
 	}
+
 	public void createButtonPanel() {
 		buttonPanel = new JPanel();
 		listTool = new JButton("List All Tools");
@@ -138,10 +141,9 @@ public class ToolView extends JFrame {
 	public void addCentreComp() {
 		centrePanel = new JPanel();
 		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
-		//centrePanel.add(centrePanel, BorderLayout.SOUTH);
-		//centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
+		// centrePanel.add(centrePanel, BorderLayout.SOUTH);
+		// centrePanel.add(checkBoxPanel, BorderLayout.SOUTH);
 	}
-
 
 	public void addNorthComp() {
 		title = new JLabel("Welcome To The Tool Inventory Manager");
@@ -157,7 +159,7 @@ public class ToolView extends JFrame {
 //		northPanel.add(logo);
 	}
 
-	public void addWestComp() {	
+	public void addWestComp() {
 		westPanel = new JPanel();
 		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
 //		try {
@@ -189,15 +191,19 @@ public class ToolView extends JFrame {
 	public void addQuitListener(GUIListener.QuitListener listenQuit) {
 		quit.addActionListener(listenQuit);
 	}
+
 	public void addQuantityListener(GUIListener.QuantityListener listenQuantity) {
 		quantityCheck.addActionListener(listenQuantity);
 	}
+
 	public void addReduceListener(GUIListener.ReduceListener listenReduce) {
 		buyItem.addActionListener(listenReduce);
 	}
+
 	public void addListListener(GUIListener.ListListener listenList) {
 		listTool.addActionListener(listenList);
 	}
+
 	public void addSearchListener(GUIListener.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
 	}
@@ -220,28 +226,30 @@ public class ToolView extends JFrame {
 
 	public int getCheckBox() {
 		if (idSelect.isSelected()) {
-			//nameSelect.
-			if(nameSelect.isSelected()) {
+			// nameSelect.
+			if (nameSelect.isSelected()) {
 				return -1;
 			}
 			return 0;
 		} else if (nameSelect.isSelected()) {
-			if(idSelect.isSelected()) {
+			if (idSelect.isSelected()) {
 				return -1;
 			}
 			return 1;
-		}
-		else return -1;
+		} else
+			return -1;
 	}
+
 	public JFrame getFrame() {
 		return myFrame;
 	}
 
 	public void displayErrorMessage(String s) {
 		JLabel error = new JLabel(s);
-		//error.setFont(bodyFont);
+		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
 	}
+
 	public static void main(String[] args) {
 		ToolView GUI = new ToolView();
 		GUIListener listeners = new GUIListener(GUI);
