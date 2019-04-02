@@ -29,7 +29,6 @@ public class ToolView extends JFrame {
 	 * stemming from the main menu
 	 */
 	public ToolView() {
-		myFrame.setDefaultLookAndFeelDecorated(true);
 		createButtonPanel();
 		createCheckBox();
 		createSearchPanel();
