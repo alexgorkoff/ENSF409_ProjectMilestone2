@@ -12,7 +12,6 @@ public class ServerController implements Runnable {
 	private ArrayList<Supplier> suppliers;
 	private Inventory theInventory;
 	private Shop theShop;
-	
 	private SocketPack customerSockets;
 
 	public ServerController(Socket theSocket) {
@@ -20,7 +19,6 @@ public class ServerController implements Runnable {
 		readSuppliers();
 		theInventory = new Inventory(readItems());
 		theShop = new Shop(theInventory, suppliers);
-		
 		customerSockets = new SocketPack(theSocket);
 		
 	}
@@ -99,7 +97,7 @@ public class ServerController implements Runnable {
 		customerSockets.sendStringPrintln("Please enter your selection: \0");
 	}
 
-	public void menu() throws NumberFormatException, IOException {
+	public void menu() {
 
 			int choice;
 			
@@ -224,9 +222,6 @@ public class ServerController implements Runnable {
 		try {
 			menu();
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

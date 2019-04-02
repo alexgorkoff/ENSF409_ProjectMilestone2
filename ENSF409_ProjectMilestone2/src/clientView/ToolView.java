@@ -39,9 +39,9 @@ public class ToolView extends JFrame {
 		addEastComp();
 		addWestComp();
 		setTitleFont();
-		setBodyFont();
-		setTextFieldSize();
-		setButtonSize();
+		//setBodyFont();
+		//setTextFieldSize();
+		//setButtonSize();
 		drawFrame();
 
 	}
@@ -56,16 +56,16 @@ public class ToolView extends JFrame {
 	}
 
 	public void setTitleFont() {
-		Font titleFont = new Font("Serif", Font.PLAIN, 60);
+		Font titleFont = new Font("Sans Serif", Font.PLAIN, 30);
 		title.setFont(titleFont);
-		quantityCheck.setFont(titleFont);
-		buyItem.setFont(titleFont);
-		listTool.setFont(titleFont);
-		quit.setFont(titleFont);
-		SearchLabel.setFont(titleFont);
-		idSearch.setFont(titleFont);
-		searchNameLabel.setFont(titleFont);
-		searchIDLabel.setFont(titleFont);
+//		quantityCheck.setFont(titleFont);
+//		buyItem.setFont(titleFont);
+//		listTool.setFont(titleFont);
+//		quit.setFont(titleFont);
+//		SearchLabel.setFont(titleFont);
+//		idSearch.setFont(titleFont);
+//		searchNameLabel.setFont(titleFont);
+//		searchIDLabel.setFont(titleFont);
 	}
 
 	public void setButtonSize() {
@@ -131,14 +131,15 @@ public class ToolView extends JFrame {
 		quantityCheck = new JButton("Check Tool Quantity");
 		buyItem = new JButton("Reduce Quantity");
 		quit = new JButton("Quit Program");
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-		buttonPanel.add(Box.createRigidArea(new Dimension(0, 0)));
+		
+		buttonPanel.setLayout(new FlowLayout());
+//		buttonPanel.add(Box.createRigidArea(new Dimension(0, 0)));
 		buttonPanel.add(quantityCheck);
-		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(buyItem);
-		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(listTool);
-		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(quit);
 	}
 
@@ -224,7 +225,7 @@ public class ToolView extends JFrame {
 		myFrame.add(westPanel, BorderLayout.WEST);
 		myFrame.add(eastPanel, BorderLayout.EAST);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		myFrame.setSize(2000, 1500);
+		myFrame.setSize(650, 500);
 		myFrame.setVisible(true);
 	}
 
@@ -234,12 +235,13 @@ public class ToolView extends JFrame {
 
 	public int getCheckBox() {
 		if (idSelect.isSelected()) {
-			// nameSelect.
+			nameSelect.setSelected(false);
 			if (nameSelect.isSelected()) {
 				return -1;
 			}
 			return 0;
 		} else if (nameSelect.isSelected()) {
+			idSelect.setSelected(false);
 			if (idSelect.isSelected()) {
 				return -1;
 			}
