@@ -242,16 +242,8 @@ public class ToolView extends JFrame {
 
 	public int getCheckBox() {
 		if (idSelect.isSelected()) {
-			nameSelect.setSelected(false);
-			if (nameSelect.isSelected()) {
-				return -1;
-			}
 			return 0;
 		} else if (nameSelect.isSelected()) {
-			idSelect.setSelected(false);
-			if (idSelect.isSelected()) {
-				return -1;
-			}
 			return 1;
 		} else
 			return -1;
