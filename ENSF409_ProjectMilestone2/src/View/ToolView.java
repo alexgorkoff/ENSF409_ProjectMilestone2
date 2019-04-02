@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import Controller.*;
-//HELLO GUYS how are you
+//HELLO GUYS how are you??
 public class ToolView extends JFrame {
 	private JFrame myFrame;
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel;
