@@ -23,6 +23,11 @@ public class ToolView extends JFrame {
 	private JCheckBox idSelect;
 	private JCheckBox nameSelect;
 
+	/**
+	 * The constructor for the main GUI. 
+	 * Creates the main menu and all sub
+	 * menus stemming from the main menu
+	 */
 	public ToolView() {
 		myFrame.setDefaultLookAndFeelDecorated(true);
 		bodyFont = new Font("Serif", Font.PLAIN, 30);
