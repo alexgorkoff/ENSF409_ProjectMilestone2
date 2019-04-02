@@ -29,10 +29,6 @@ public class ToolView extends JFrame {
 	 * stemming from the main menu
 	 */
 	public ToolView() {
-		createButtonPanel();
-		createCheckBox();
-		createSearchPanel();
-		searchAndCheckBox();
 		addSouthComp();
 		addCentreComp();
 		addNorthComp();
@@ -43,7 +39,7 @@ public class ToolView extends JFrame {
 		setTextFieldSize();
 		setButtonSize();
 		drawFrame();
-		
+
 	}
 
 	public void setBodyFont() {
@@ -95,6 +91,8 @@ public class ToolView extends JFrame {
 
 	public void searchAndCheckBox() {
 		searchAndCheckBox = new JPanel();
+		createCheckBox();
+		createSearchPanel();
 		searchAndCheckBox.setLayout(new BoxLayout(searchAndCheckBox, BoxLayout.Y_AXIS));
 		searchAndCheckBox.add(searchPanel);
 		searchAndCheckBox.add(checkBoxPanel);
@@ -115,6 +113,8 @@ public class ToolView extends JFrame {
 
 	public void addSouthComp() {
 		southPanel = new JPanel();
+		searchAndCheckBox();
+		createButtonPanel();
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
 		southPanel.add(searchAndCheckBox);
 		southPanel.add(buttonPanel);
