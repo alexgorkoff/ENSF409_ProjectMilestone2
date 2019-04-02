@@ -43,6 +43,7 @@ public class ToolView extends JFrame {
 		setTextFieldSize();
 		setButtonSize();
 		drawFrame();
+		
 	}
 
 	public void setBodyFont() {
