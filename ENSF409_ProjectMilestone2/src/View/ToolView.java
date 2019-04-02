@@ -199,17 +199,36 @@ public class ToolView extends JFrame {
 		myFrame.setVisible(true);
 	}
 
-	public int getSearch() {
-		return Integer.parseInt(search.getText());
+	public String getSearch() {
+		return search.getText();
 	}
 
-	public static void main(String[] args) {
-		ToolView GUI = new ToolView();
-		GUIListener listeners = new GUIListener(GUI);
+	public int getCheckBox() {
+		if (idSelect.isSelected()) {
+			//nameSelect.
+			if(nameSelect.isSelected()) {
+				return -1;
+			}
+			return 0;
+		} else if (nameSelect.isSelected()) {
+			if(idSelect.isSelected()) {
+				return -1;
+			}
+			return 1;
+		}
+		else return -1;
 	}
-
 	public JFrame getFrame() {
 		return myFrame;
 	}
 
+	public void displayErrorMessage(String s) {
+		JLabel error = new JLabel(s);
+		//error.setFont(bodyFont);
+		JOptionPane.showMessageDialog(this, error);
+	}
+	public static void main(String[] args) {
+		ToolView GUI = new ToolView();
+		GUIListener listeners = new GUIListener(GUI);
+	}
 }

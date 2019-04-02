@@ -61,7 +61,25 @@ public class GUIListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			if (myView.getCheckBox() == 0) {
+				try {
+					int toSearch = Integer.parseInt(myView.getSearch());
+					System.out.println("YEEE");
+				}catch(Exception notNum) {
+					myView.displayErrorMessage("Please enter a numeric value for the ID");
+				}
+				//SearchID(toSearch);
+			} else if (myView.getCheckBox() == 1) {
+				String toSearch = myView.getSearch();
+				if(!toSearch.equals("")) {
+					//SearchName(toSearch);
+				}
+				else {
+					myView.displayErrorMessage("Please enter a tool name");
+				}
+			} else {
+				myView.displayErrorMessage("Please select a method to search by");
+			}
 		}
 	}
 }
