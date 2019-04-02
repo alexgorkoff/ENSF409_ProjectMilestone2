@@ -27,7 +27,7 @@ public class Database {
 		}
 	}
 	
-	public void processResult() throws SQLException
+	/*public void processResult() throws SQLException
 	{
 		while(supplierResult.next())
 		{
@@ -39,5 +39,5 @@ public class Database {
 	{
 		Database D = new Database();
 		D.processResult();
-	}
+	}*/
 }
