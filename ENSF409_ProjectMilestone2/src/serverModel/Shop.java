@@ -67,7 +67,7 @@ public class Shop {
 	}
 	
 	private String outputItem (Item theItem){
-		return "\nThe item information is as follows: \n" + theItem;
+		return "\nThe item information is as follows: \n" + theItem.toString();
 	}
 
 	public String getItemQuantity(String name) {
