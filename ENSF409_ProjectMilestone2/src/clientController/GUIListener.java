@@ -8,9 +8,25 @@ import javax.swing.event.ListSelectionListener;
 
 import clientView.*;
 
+/**
+ * The Controller as part of a MVC architecture that will control the GUI and
+ * all of the GUI Listeners to the client
+ * 
+ * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+ * @version 1.2.0
+ * @since March 29, 2019
+ */
 public class GUIListener {
+	/**
+	 * View that is part of the GUI Controller
+	 */
 	private ToolView myView;
 
+	/**
+	 * Constructor to initialize all of the listeners
+	 * 
+	 * @param theView View which holds all of the panel componenets
+	 */
 	public GUIListener(ToolView theView) {
 		myView = theView;
 		myView.addQuitListener(new QuitListener());
@@ -23,7 +39,17 @@ public class GUIListener {
 		myView.addNameSelectListener(new nameSearchListener());
 	}
 
+	/**
+	 * The ListListener class to set text to be selected if clicked on
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class ListListener implements ListSelectionListener {
+		/**
+		 * Pre-defined method to handle a list item being selected
+		 */
 		public void valueChanged(ListSelectionEvent e) {
 			int index = myView.getListArea().getSelectedIndex();
 			if (index >= 0) {
@@ -33,7 +59,17 @@ public class GUIListener {
 		}
 	}
 
+	/**
+	 * The ListActionsListener class to respond to List button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class ListActionListener implements ActionListener {
+		/**
+		 * Pre-defined method to handle a button being clicked on
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
@@ -41,8 +77,18 @@ public class GUIListener {
 
 	}
 
+	/**
+	 * The QuantityListener class to respond to quantity button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class QuantityListener implements ActionListener {
 
+		/**
+		 * Pre-defined method to handle the Quantity button being pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String toolName = JOptionPane.showInputDialog("Enter The Tool Name:");
@@ -51,8 +97,17 @@ public class GUIListener {
 
 	}
 
+	/**
+	 * The ReduceListener class to respond to Reduce button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class ReduceListener implements ActionListener {
-
+		/**
+		 * Pre-defined method to handle the reduce button being pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// reduceQuantity();
@@ -61,8 +116,17 @@ public class GUIListener {
 
 	}
 
+	/**
+	 * The QuitListener class to respond to Quit button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class QuitListener implements ActionListener {
-
+		/**
+		 * method to handle the quit button being pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			myView.getFrame().setVisible(false); // you can't see me!
@@ -70,8 +134,17 @@ public class GUIListener {
 		}
 	}
 
+	/**
+	 * The idSearchListener class to respond to idSearchCheckBox button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class idSearchListener implements ActionListener {
-
+		/**
+		 * handles the idSelect checkbox being pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			myView.setNameSelect(false);
@@ -79,8 +152,17 @@ public class GUIListener {
 
 	}
 
+	/**
+	 * The nameSearchListener class to respond to nameSearchCheckBox button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class nameSearchListener implements ActionListener {
-
+		/**
+		 * handles the nameSelect checkbox being pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			myView.setIDSelect(false);
@@ -88,8 +170,17 @@ public class GUIListener {
 
 	}
 
+	/**
+	 * The SearchListener class to respond to Search button clicks
+	 * 
+	 * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+	 * @version 1.0.1
+	 * @since March 29, 2019
+	 */
 	public class SearchListener implements ActionListener {
-
+		/**
+		 * method to handle the search button clicks
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (myView.getCheckBox() == 0) {
