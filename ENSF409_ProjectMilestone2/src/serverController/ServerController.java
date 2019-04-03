@@ -1,4 +1,5 @@
 package serverController;
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,13 +14,18 @@ public class ServerController implements Runnable {
 	private Inventory theInventory;
 	private Shop theShop;
 	private SocketPack customerSockets;
+	
+	private int actionPerformed;
 
 	public ServerController(Socket theSocket) {
+		
 		suppliers = new ArrayList<Supplier>();
 		readSuppliers();
 		theInventory = new Inventory(readItems());
 		theShop = new Shop(theInventory, suppliers);
 		customerSockets = new SocketPack(theSocket);
+		
+		actionPerformed = 0;
 		
 	}
 
@@ -100,6 +106,7 @@ public class ServerController implements Runnable {
 	public void menu() {
 
 			int choice;
+			ActionEvent event;
 			
 			while (true) {
 
@@ -108,6 +115,7 @@ public class ServerController implements Runnable {
 				try {
 					
 					choice = Integer.parseInt(customerSockets.getSocketIn().readLine());
+					
 					
 				} catch(NumberFormatException nfe) {
 					customerSockets.sendStringPrintln("\n*** Invalid input. Please enter an Integer. ***\n");
@@ -119,6 +127,8 @@ public class ServerController implements Runnable {
 
 				switch (choice) {
 
+				case 0:
+					break;
 				case 1:
 					theShop.listAllItems(customerSockets);
 					break;

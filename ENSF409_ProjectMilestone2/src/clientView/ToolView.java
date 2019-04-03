@@ -14,6 +14,7 @@ import javax.swing.*;
 import clientController.*;
 
 public class ToolView extends JFrame {
+	
 	private JFrame myFrame;
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
 			searchAndCheckBox;
@@ -192,35 +193,35 @@ public class ToolView extends JFrame {
 		eastPanel = new JPanel();
 	}
 
-	public void addQuitListener(GUIListener.QuitListener listenQuit) {
+	public void addQuitListener(ClientController.QuitListener listenQuit) {
 		quit.addActionListener(listenQuit);
 	}
 
-	public void addQuantityListener(GUIListener.QuantityListener listenQuantity) {
+	public void addQuantityListener(ClientController.QuantityListener listenQuantity) {
 		quantityCheck.addActionListener(listenQuantity);
 	}
 
-	public void addReduceListener(GUIListener.ReduceListener listenReduce) {
+	public void addReduceListener(ClientController.ReduceListener listenReduce) {
 		buyItem.addActionListener(listenReduce);
 	}
 
-	public void addListActionListener(GUIListener.ListActionListener listenList) {
+	public void addListActionListener(ClientController.ListActionListener listenList) {
 		listTool.addActionListener(listenList);
 	}
 
-	public void addSearchListener(GUIListener.SearchListener listenSearch) {
+	public void addSearchListener(ClientController.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
 	}
 
-	public void addListListener(GUIListener.ListListener listListen) {
+	public void addListListener(ClientController.ListListener listListen) {
 		listArea.addListSelectionListener(listListen);
 	}
 
-	public void addIDSelectListener(GUIListener.idSearchListener IDListen) {
+	public void addIDSelectListener(ClientController.idSearchListener IDListen) {
 		idSelect.addActionListener(IDListen);
 	}
 
-	public void addNameSelectListener(GUIListener.nameSearchListener nameListen) {
+	public void addNameSelectListener(ClientController.nameSearchListener nameListen) {
 		nameSelect.addActionListener(nameListen);
 	}
 
@@ -289,8 +290,8 @@ public class ToolView extends JFrame {
 		idSelect.setSelected(mark);
 	}
 
-	public static void main(String[] args) {
-		ToolView GUI = new ToolView();
-		GUIListener listeners = new GUIListener(GUI);
-	}
+//	public static void main(String[] args) {
+//		ToolView GUI = new ToolView();
+//		ClientController listeners = new ClientController(GUI);
+//	}
 }
