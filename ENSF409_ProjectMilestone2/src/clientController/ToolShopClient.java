@@ -11,8 +11,10 @@ public class ToolShopClient {
 	private ClientController clientController;
 	
 	public ToolShopClient(String portName, int portNumber) {
+		
 		clientSockets = new SocketPack(portName, portNumber);
 		clientController = new ClientController(clientSockets);
+		
 	}
 	
 	public void communicateServer() {

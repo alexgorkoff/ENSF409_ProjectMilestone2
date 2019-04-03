@@ -261,7 +261,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listenQuit is the listener assigned to the Quit button
 	 */
-	public void addQuitListener(GUIListener.QuitListener listenQuit) {
+	public void addQuitListener(ClientController.QuitListener listenQuit) {
 		quit.addActionListener(listenQuit);
 	}
 
@@ -271,7 +271,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listenQuantity is the listener assigned to the Quantity button
 	 */
-	public void addQuantityListener(GUIListener.QuantityListener listenQuantity) {
+	public void addQuantityListener(ClientController.QuantityListener listenQuantity) {
 		quantityCheck.addActionListener(listenQuantity);
 	}
 
@@ -281,7 +281,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listenReduce is the listener assigned to the Reduce button
 	 */
-	public void addReduceListener(GUIListener.ReduceListener listenReduce) {
+	public void addReduceListener(ClientController.ReduceListener listenReduce) {
 		buyItem.addActionListener(listenReduce);
 	}
 
@@ -291,7 +291,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listenList is the listener assigned to the List button
 	 */
-	public void addListActionListener(GUIListener.ListActionListener listenList) {
+	public void addListActionListener(ClientController.ListActionListener listenList) {
 		listTool.addActionListener(listenList);
 	}
 
@@ -301,7 +301,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listenSearch is the listener assigned to the Search button
 	 */
-	public void addSearchListener(GUIListener.SearchListener listenSearch) {
+	public void addSearchListener(ClientController.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
 	}
 
@@ -311,7 +311,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listListen
 	 */
-	public void addListListener(GUIListener.ListListener listListen) {
+	public void addListListener(ClientController.ListListener listListen) {
 		listArea.addListSelectionListener(listListen);
 	}
 
@@ -321,7 +321,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param IDListen listener of idSelect checkbox in Controller
 	 */
-	public void addIDSelectListener(GUIListener.idSearchListener IDListen) {
+	public void addIDSelectListener(ClientController.idSearchListener IDListen) {
 		idSelect.addActionListener(IDListen);
 	}
 
@@ -331,7 +331,7 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param nameListen listener of nameSelect checkbox in Controller
 	 */
-	public void addNameSelectListener(GUIListener.nameSearchListener nameListen) {
+	public void addNameSelectListener(ClientController.nameSearchListener nameListen) {
 		nameSelect.addActionListener(nameListen);
 	}
 
