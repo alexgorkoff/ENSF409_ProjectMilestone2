@@ -9,6 +9,10 @@ import javax.swing.event.ListSelectionListener;
 import clientView.*;
 
 public class GUIListener {
+	
+	/**
+	 * View that is part of the GUI Controller
+	 */
 	private ToolView myView;
 
 	public GUIListener(ToolView theView) {
