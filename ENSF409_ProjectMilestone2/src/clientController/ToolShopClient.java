@@ -27,7 +27,7 @@ public class ToolShopClient {
 					read = clientSockets.getSocketIn().readLine();
 					if(read.contains("\0")) {
 						read = read.replace("\0", "");
-						System.out.println(read);
+						clientController.sendInputFromUser(read);
 						break;
 					}
 					if(read.contentEquals("QUIT")) {

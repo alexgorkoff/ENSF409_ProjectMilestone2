@@ -50,6 +50,13 @@ public class ClientController {
 		clientSockets = theSockets;
 		
 	}
+	public ToolView getView() {
+		return myView;
+	}
+	public void sendInputFromUser(String x) {
+		String userSaid = myView.getInput(x);
+		clientSockets.sendStringPrintln(x);
+	}
 
 	/**
 	 * The ListListener class to set text to be selected if clicked on
@@ -122,9 +129,6 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String toolName = JOptionPane.showInputDialog("Enter The Name of The Tool:");
-			// reduceQuantity();
-			JOptionPane.showMessageDialog(null, "Quantity Reduced by 1");
 			clientSockets.sendStringPrintln("5");
 		}
 

@@ -392,6 +392,10 @@ public class ToolView extends JFrame {
 		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
 	}
+	public String getInput(String s) {
+		String answer = JOptionPane.showInputDialog(this, s);
+		return answer;
+	}
 
 	/**
 	 * Used to initialize the scrollable Pane
