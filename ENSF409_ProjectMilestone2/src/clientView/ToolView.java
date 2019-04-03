@@ -13,19 +13,56 @@ import javax.swing.*;
 
 import clientController.*;
 
+/**
+ * The view as part of a MVC architecture that will control the GUI and all of
+ * the GUI functionality to the client
+ * 
+ * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+ * @version 1.1.0
+ * @since March 29, 2019
+ */
 public class ToolView extends JFrame {
-	
+	/**
+	 * Main frame to contain individual panels
+	 */
 	private JFrame myFrame;
+	/**
+	 * Panels to bundle together componenets that are supposed to be together
+	 */
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
 			searchAndCheckBox;
+	/**
+	 * Buttons for the user to manuever around the GUI
+	 */
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
+	/**
+	 * Contain any text and images
+	 */
 	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
 			quitLogo, reduceLogo;
+	/**
+	 * Allow the user to enter input to search
+	 */
 	private JTextField search;
+	/**
+	 * Allow the user to select if they would like to search by name or ID
+	 */
 	private JCheckBox idSelect, nameSelect;
+	/**
+	 * Scrollable panle to contain the list of all tools
+	 */
 	private JScrollPane scrollPanel;
+	/**
+	 * Used to show the selected text when all tools are selected
+	 */
 	private DefaultListModel<String> listModel;
+	/**
+	 * Will contain a list of all the tools to display on the scroll panel
+	 */
 	private JList<String> listArea;
+	/**
+	 * Text Field to show the list of tools
+	 */
 	private JTextField selectedTextField;
 
 	/**
@@ -39,35 +76,36 @@ public class ToolView extends JFrame {
 		addEastComp();
 		addWestComp();
 		setTitleFont();
-		// setBodyFont();
-		// setTextFieldSize();
-		// setButtonSize();
 		drawFrame();
 
 	}
 
+	/**
+	 * Sets the font of of minor components to have a 'bodyFont'
+	 */
 	public void setBodyFont() {
 		Font bodyFont = new Font("Serif", Font.PLAIN, 30);
 	}
 
+	/**
+	 * Set the size of the TextField to be used for searching
+	 */
 	public void setTextFieldSize() {
 		Font textFieldFont = new Font("Serif", Font.PLAIN, 60);
 		search.setFont(textFieldFont);
 	}
 
+	/**
+	 * Set the font of major components to be 'titleFont'
+	 */
 	public void setTitleFont() {
 		Font titleFont = new Font("Sans Serif", Font.PLAIN, 30);
 		title.setFont(titleFont);
-//		quantityCheck.setFont(titleFont);
-//		buyItem.setFont(titleFont);
-//		listTool.setFont(titleFont);
-//		quit.setFont(titleFont);
-//		SearchLabel.setFont(titleFont);
-//		idSearch.setFont(titleFont);
-//		searchNameLabel.setFont(titleFont);
-//		searchIDLabel.setFont(titleFont);
 	}
 
+	/**
+	 * Set the size of button to a size that fits all the text
+	 */
 	public void setButtonSize() {
 		idSearch.setPreferredSize(new Dimension(350, 80));
 		quantityCheck.setSize(new Dimension(400, 100));
@@ -76,6 +114,9 @@ public class ToolView extends JFrame {
 		quit.setSize(new Dimension(200, 100));
 	}
 
+	/**
+	 * Creates the components necessary to constitute the searchPanel
+	 */
 	public void createSearchPanel() {
 		searchPanel = new JPanel();
 		search = new JTextField(15);
@@ -93,6 +134,9 @@ public class ToolView extends JFrame {
 		searchPanel.add(idSearch, BorderLayout.NORTH);
 	}
 
+	/**
+	 * Creates the components that are going to be used for searching for items
+	 */
 	public void searchAndCheckBox() {
 		searchAndCheckBox = new JPanel();
 		createCheckBox();
@@ -102,6 +146,9 @@ public class ToolView extends JFrame {
 		searchAndCheckBox.add(checkBoxPanel);
 	}
 
+	/**
+	 * create the checkbox components
+	 */
 	public void createCheckBox() {
 		checkBoxPanel = new JPanel();
 		idSelect = new JCheckBox();
@@ -115,6 +162,9 @@ public class ToolView extends JFrame {
 		checkBoxPanel.add(nameSelect);
 	}
 
+	/**
+	 * Add all the necessary components to the southPanel
+	 */
 	public void addSouthComp() {
 		southPanel = new JPanel();
 		searchAndCheckBox();
@@ -125,6 +175,9 @@ public class ToolView extends JFrame {
 
 	}
 
+	/**
+	 * create the panel of all the buttons
+	 */
 	public void createButtonPanel() {
 		buttonPanel = new JPanel();
 		listTool = new JButton("List All Tools");
@@ -133,16 +186,15 @@ public class ToolView extends JFrame {
 		quit = new JButton("Quit Program");
 
 		buttonPanel.setLayout(new FlowLayout());
-//		buttonPanel.add(Box.createRigidArea(new Dimension(0, 0)));
 		buttonPanel.add(quantityCheck);
-//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(buyItem);
-//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(listTool);
-//		buttonPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		buttonPanel.add(quit);
 	}
 
+	/**
+	 * Create and add components to the centre panel
+	 */
 	public void addCentreComp() {
 		initList();
 		centrePanel = new JPanel();
@@ -150,6 +202,9 @@ public class ToolView extends JFrame {
 		centrePanel.add(scrollPanel);
 	}
 
+	/**
+	 * create and add components to the north panel
+	 */
 	public void addNorthComp() {
 		title = new JLabel("Welcome To The Tool Inventory Manager");
 		northPanel = new JPanel();
@@ -164,6 +219,9 @@ public class ToolView extends JFrame {
 //		northPanel.add(logo);
 	}
 
+	/**
+	 * Create and add add components to the west panel
+	 */
 	public void addWestComp() {
 		westPanel = new JPanel();
 		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
@@ -189,42 +247,96 @@ public class ToolView extends JFrame {
 //		westPanel.add(quitLogo);
 	}
 
+	/**
+	 * Create and add components to the east panel
+	 */
 	public void addEastComp() {
 		eastPanel = new JPanel();
 	}
 
-	public void addQuitListener(ClientController.QuitListener listenQuit) {
+	/**
+	 * Linking the View with the Controller by assigning a listener to the Quit
+	 * button
+	 * 
+	 * @param listenQuit is the listener assigned to the Quit button
+	 */
+	public void addQuitListener(GUIListener.QuitListener listenQuit) {
 		quit.addActionListener(listenQuit);
 	}
 
-	public void addQuantityListener(ClientController.QuantityListener listenQuantity) {
+	/**
+	 * Linking the View with the Controller by assigning a listener to the Quantity
+	 * button
+	 * 
+	 * @param listenQuantity is the listener assigned to the Quantity button
+	 */
+	public void addQuantityListener(GUIListener.QuantityListener listenQuantity) {
 		quantityCheck.addActionListener(listenQuantity);
 	}
 
-	public void addReduceListener(ClientController.ReduceListener listenReduce) {
+	/**
+	 * Linking the View with the Controller by assigning a listener to the Reduce
+	 * button
+	 * 
+	 * @param listenReduce is the listener assigned to the Reduce button
+	 */
+	public void addReduceListener(GUIListener.ReduceListener listenReduce) {
 		buyItem.addActionListener(listenReduce);
 	}
 
-	public void addListActionListener(ClientController.ListActionListener listenList) {
+	/**
+	 * Linking the View with the Controller by assigning a listener to the Quantity
+	 * button
+	 * 
+	 * @param listenList is the listener assigned to the List button
+	 */
+	public void addListActionListener(GUIListener.ListActionListener listenList) {
 		listTool.addActionListener(listenList);
 	}
 
-	public void addSearchListener(ClientController.SearchListener listenSearch) {
+	/**
+	 * Linking the View with the Controller by assigning a listener to the Quantity
+	 * button
+	 * 
+	 * @param listenSearch is the listener assigned to the Search button
+	 */
+	public void addSearchListener(GUIListener.SearchListener listenSearch) {
 		idSearch.addActionListener(listenSearch);
 	}
 
-	public void addListListener(ClientController.ListListener listListen) {
+	/**
+	 * Linking the View with the Controller by assigning a ListListener to the List
+	 * button
+	 * 
+	 * @param listListen
+	 */
+	public void addListListener(GUIListener.ListListener listListen) {
 		listArea.addListSelectionListener(listListen);
 	}
 
-	public void addIDSelectListener(ClientController.idSearchListener IDListen) {
+	/**
+	 * Linking the View with the Controller by assigning an Action Listener to a
+	 * checkBox
+	 * 
+	 * @param IDListen listener of idSelect checkbox in Controller
+	 */
+	public void addIDSelectListener(GUIListener.idSearchListener IDListen) {
 		idSelect.addActionListener(IDListen);
 	}
 
-	public void addNameSelectListener(ClientController.nameSearchListener nameListen) {
+	/**
+	 * Linking the View with the Controller by assigning an Action Listener to a
+	 * checkBox
+	 * 
+	 * @param nameListen listener of nameSelect checkbox in Controller
+	 */
+	public void addNameSelectListener(GUIListener.nameSearchListener nameListen) {
 		nameSelect.addActionListener(nameListen);
 	}
 
+	/**
+	 * Adds panels to the mainFrame and sets the orientation of it
+	 */
 	public void drawFrame() {
 		myFrame = new JFrame("WELCOME");
 		myFrame.add(southPanel, BorderLayout.SOUTH);
@@ -237,10 +349,20 @@ public class ToolView extends JFrame {
 		myFrame.setVisible(true);
 	}
 
+	/**
+	 * Get the user input from the textbox
+	 * 
+	 * @return the input to the search textbox
+	 */
 	public String getSearch() {
 		return search.getText();
 	}
 
+	/**
+	 * Get the state of the checkbox selection
+	 * 
+	 * @return 1 for searchByName selected, 0 for searchByID, -1 otherwise
+	 */
 	public int getCheckBox() {
 		if (idSelect.isSelected()) {
 			return 0;
@@ -250,16 +372,29 @@ public class ToolView extends JFrame {
 			return -1;
 	}
 
+	/**
+	 * Get for the overall Frame
+	 * 
+	 * @return the Frame
+	 */
 	public JFrame getFrame() {
 		return myFrame;
 	}
 
+	/**
+	 * Display error messages to the user
+	 * 
+	 * @param s the error message to be displayed
+	 */
 	public void displayErrorMessage(String s) {
 		JLabel error = new JLabel(s);
 		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
 	}
 
+	/**
+	 * Used to initialize the scrollable Pane
+	 */
 	public void initList() {
 		selectedTextField = new JTextField(40);
 		listModel = new DefaultListModel<String>();
@@ -270,22 +405,48 @@ public class ToolView extends JFrame {
 		listArea.setVisibleRowCount(35);
 	}
 
+	/**
+	 * 
+	 * Getter for the listArea
+	 * 
+	 * @return the JList
+	 */
 	public JList<String> getListArea() {
 		return listArea;
 	}
 
+	/**
+	 * Getter for the listModel
+	 * 
+	 * @return list Model
+	 */
 	public DefaultListModel<String> getListModel() {
 		return listModel;
 	}
 
+	/**
+	 * Getter for the selectedtextField
+	 * 
+	 * @return selectedTextField
+	 */
 	public JTextField getSelectedTextField() {
 		return selectedTextField;
 	}
 
+	/**
+	 * Set the state of the nameSelect checkbox
+	 * 
+	 * @param mark to set the checkbox to
+	 */
 	public void setNameSelect(boolean mark) {
 		nameSelect.setSelected(mark);
 	}
 
+	/**
+	 * Set the state of the idSelect checkbox
+	 * 
+	 * @param mark to set the checkbox to
+	 */
 	public void setIDSelect(boolean mark) {
 		idSelect.setSelected(mark);
 	}
