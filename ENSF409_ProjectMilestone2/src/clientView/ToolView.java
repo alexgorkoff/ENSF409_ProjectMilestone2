@@ -13,6 +13,7 @@ import javax.swing.*;
 
 import clientController.*;
 
+
 /**
  * The view as part of a MVC architecture that will control the GUI and all of
  * the GUI functionality to the client

@@ -17,6 +17,7 @@ import clientView.*;
  * @since March 29, 2019
  */
 public class GUIListener {
+	
 	/**
 	 * View that is part of the GUI Controller
 	 */
