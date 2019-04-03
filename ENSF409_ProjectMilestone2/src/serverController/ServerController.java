@@ -23,6 +23,7 @@ public class ServerController implements Runnable {
 		readSuppliers();
 		theInventory = new Inventory(readItems());
 		theShop = new Shop(theInventory, suppliers);
+		
 		customerSockets = new SocketPack(theSocket);
 		
 		actionPerformed = 0;
@@ -102,52 +103,61 @@ public class ServerController implements Runnable {
 		customerSockets.sendStringPrintln("");
 		customerSockets.sendStringPrintln("Please enter your selection: \0");
 	}
+	
+	public String readGUIInput() throws IOException {
+		 
+		StringBuffer input = null;
+		 
+		input = new StringBuffer(customerSockets.getSocketIn().readLine());
+		 
+		return input.toString();
+		 
+	}
 
-	public void menu() {
+	public void menu() throws IOException {
 
-			int choice;
-			ActionEvent event;
+//			int choice;
 			
 			while (true) {
 
-				printMenuChoices();
+//				printMenuChoices();
+//				
+//				try {
+//					
+//					choice = Integer.parseInt(customerSockets.getSocketIn().readLine());
+//					
+//					
+//				} catch(NumberFormatException nfe) {
+//					customerSockets.sendStringPrintln("\n*** Invalid input. Please enter an Integer. ***\n");
+//					continue;
+//				} catch(IOException ioe) {
+//					customerSockets.sendStringPrintln("\n*** IOException in menu() ***\n");
+//					continue;
+//				}
 				
-				try {
-					
-					choice = Integer.parseInt(customerSockets.getSocketIn().readLine());
-					
-					
-				} catch(NumberFormatException nfe) {
-					customerSockets.sendStringPrintln("\n*** Invalid input. Please enter an Integer. ***\n");
-					continue;
-				} catch(IOException ioe) {
-					customerSockets.sendStringPrintln("\n*** IOException in menu() ***\n");
-					continue;
-				}
+				String choice = readGUIInput();
 
 				switch (choice) {
 
-				case 0:
-					break;
-				case 1:
+				case "1":
 					theShop.listAllItems(customerSockets);
 					break;
-				case 2:
+				case "2":
 					searchForItemByName();
 					break;
-				case 3:
+				case "3":
 					searchForItemById();
 					break;
-				case 4:
+				case "4":
 					checkItemQuantity();
 					break;
-				case 5:
+				case "5":
 					decreaseItem();
 					break;
-				case 6:
+				case "6":
 					printOrder();
 					break;
-				case 7:
+				case "7":
 					customerSockets.sendStringPrintln("\nGood Bye!");
 					customerSockets.sendStringPrintln("QUIT");
 					return;
@@ -232,6 +242,9 @@ public class ServerController implements Runnable {
 		try {
 			menu();
 		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -397,13 +397,13 @@ public class ToolView extends JFrame {
 	 * Used to initialize the scrollable Pane
 	 */
 	public void initList() {
-		selectedTextField = new JTextField(40);
+		selectedTextField = new JTextField();
 		listModel = new DefaultListModel<String>();
 		listArea = new JList<String>(listModel);
 		String width = "1234567890123456789012345678901234567890";
 		listArea.setPrototypeCellValue(width);
 		listArea.setFont(new Font("Courier New", Font.BOLD, 20));
-		listArea.setVisibleRowCount(35);
+		listArea.setVisibleRowCount(19);
 	}
 
 	/**
