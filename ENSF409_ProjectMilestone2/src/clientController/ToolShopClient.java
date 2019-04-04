@@ -1,5 +1,6 @@
 package clientController;
 import java.io.IOException;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -83,7 +84,10 @@ public class ToolShopClient implements SessionID{
 	}
 	
 	public static void main(String [] args) throws UnknownHostException, InterruptedException {
-		ToolShopClient toolShopClient = new ToolShopClient("localhost", 8099);
+		InetAddress ip;
+		ip = InetAddress.getLocalHost();
+
+		ToolShopClient toolShopClient = new ToolShopClient(ip.getHostAddress().toString(), 8099);
 		toolShopClient.communicateServer();
 	}
 	
