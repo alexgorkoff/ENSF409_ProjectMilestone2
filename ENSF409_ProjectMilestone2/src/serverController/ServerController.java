@@ -10,14 +10,14 @@ import javax.swing.JOptionPane;
 
 import serverModel.*;
 
-public class ServerController implements Runnable {
+public class ServerController implements Runnable, SessionID {
 
 	private ArrayList<Supplier> suppliers;
 	private Inventory theInventory;
 	private Shop theShop;
 	private SocketPack customerSockets;
 	
-	private int actionPerformed;
+	private String sessionID;
 
 	public ServerController(Socket theSocket) {
 		
@@ -27,8 +27,6 @@ public class ServerController implements Runnable {
 		theShop = new Shop(theInventory, suppliers);
 		
 		customerSockets = new SocketPack(theSocket);
-		
-		actionPerformed = 0;
 		
 	}
 
@@ -93,70 +91,36 @@ public class ServerController implements Runnable {
 
 	}
 
-	private void printMenuChoices() {
-		customerSockets.sendString("Please choose from one of the following options: ");
-		customerSockets.sendString("1. List all tools in the inventory.");
-		customerSockets.sendString("2. Search for tool by tool name.");
-		customerSockets.sendString("3. Search for tool by tool id.");
-		customerSockets.sendString("4. Check item quantity.");
-		customerSockets.sendString("5. Decrease item quantity.");
-		customerSockets.sendString("6. Print today's order.");
-		customerSockets.sendString("7. Quit.");
-		customerSockets.sendString("");
-		customerSockets.sendString("Please enter your selection: \0");
-	}
-	
-//	public String readGUIInput() throws IOException {
-//		 
-//		StringBuffer input = null;
-//		 
-//		input = new StringBuffer(customerSockets.getSocketIn().readLine());
-//		 
-//		return input.toString();
-//		 
-//	}
-
 	public void menu() throws IOException {
-
-//			int choice;
 			
 			while (true) {
 
-//				printMenuChoices();
-//				
-//				try {
-//					
-//					choice = Integer.parseInt(customerSockets.getSocketIn().readLine());
-//					
-//					
-//				} catch(NumberFormatException nfe) {
-//					customerSockets.sendStringPrintln("\n*** Invalid input. Please enter an Integer. ***\n");
-//					continue;
-//				} catch(IOException ioe) {
-//					customerSockets.sendStringPrintln("\n*** IOException in menu() ***\n");
-//					continue;
-//				}
-				
 				String choice = customerSockets.getSocketIn().readLine();
 
 				switch (choice) {
 
 				case "1":
+					sessionID = LIST_ALL_ITEMS;
 					theShop.listAllItems(customerSockets);
 					break;
 				case "2":
+					sessionID = SEARCH_ITEM_NAME;
 					searchForItemByName();
 					break;
 				case "3":
+					sessionID = SEARCH_ITEM_ID;
 					searchForItemById();
 					break;
 				case "4":
+					sessionID = GET_ITEM_QUANTITY;
 					checkItemQuantity();
 					break;
 				case "5":
+					sessionID = DECREASE_QUANTITY;
 					decreaseItem();
 					break;
 				case "6":
+					sessionID = PRINT_ORDER;
 					printOrder();
 					break;
 				case "7":
@@ -183,11 +147,9 @@ public class ServerController implements Runnable {
 		
 	}
 
-	private void checkItemQuantity() {
+	private synchronized void checkItemQuantity() {
 		
 		String itemName = getItemName();
-		
-		customerSockets.sendString("OutputQuantity");
 		
 		String itemQuantity = theShop.getItemQuantity(itemName);
 		
@@ -200,7 +162,7 @@ public class ServerController implements Runnable {
 	private String getItemName() {
 		
 		String clientResponse = "";
-		customerSockets.sendString("name");
+		customerSockets.sendString(sessionID);
 		try {
 			 clientResponse = customerSockets.getSocketIn().readLine();
 		} catch (IOException e) {
@@ -214,7 +176,7 @@ public class ServerController implements Runnable {
 		int itemID = 0;
 
 		String clientResponse = "";
-		customerSockets.sendString("id");
+		customerSockets.sendString(sessionID);
 		try {
 			 clientResponse = customerSockets.getSocketIn().readLine();
 			 itemID = Integer.parseInt(clientResponse);

@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import serverController.SessionID;
 import serverModel.*;
 
-public class ToolShopClient {
+public class ToolShopClient implements SessionID{
 	
 	private SocketPack clientSockets;
 	private ClientController clientController;
@@ -17,29 +18,28 @@ public class ToolShopClient {
 		
 	}
 	
-	public void communicateServer() {
+	public synchronized void communicateServer() throws InterruptedException {
 		try {
 			while(true) {
 
-				String read = "";
-				read = clientSockets.getSocketIn().readLine();
-				System.out.println(read);
+				String sessionLabel = "";
 				
-				switch(read) {
+					sessionLabel = clientSockets.getSocketIn().readLine();
+					System.out.println(sessionLabel);
 				
-				case "name":
+				switch(sessionLabel) {
+				
+				case GET_ITEM_QUANTITY:
 					clientSockets.sendString(clientController.getToolNameUser());
-					break;
-				
-				case "id":
-					clientSockets.sendString(clientController.getToolIDUser());
-					break;
-				
-				case "OutputQuantity":
+					clientSockets.getSocketIn().readLine(); //Have no idea where this space is being read from
 					clientController.outputClientGUI(clientSockets.getSocketIn().readLine());
 					break;
 				
-				case "QUIT": 
+				case DECREASE_QUANTITY:
+					clientSockets.sendString(clientController.getToolIDUser());
+					break;
+				
+				case QUIT: 
 					return;
 				
 				default:
@@ -61,7 +61,7 @@ public class ToolShopClient {
 		}
 	}
 	
-	public static void main(String [] args) throws UnknownHostException {
+	public static void main(String [] args) throws UnknownHostException, InterruptedException {
 		ToolShopClient toolShopClient = new ToolShopClient("localhost", 8099);
 		toolShopClient.communicateServer();
 	}
