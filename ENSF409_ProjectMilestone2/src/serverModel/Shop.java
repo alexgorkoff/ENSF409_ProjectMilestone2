@@ -30,7 +30,7 @@ public class Shop {
 		
 		String item = theInventory.toString();
 		//for(String s: item.split("\n")) {
-			customerSockets.sendString(item);	
+		customerSockets.sendString(item);	
 		//}
 		
 	}

@@ -55,7 +55,8 @@ public class ToolShopClient implements SessionID{
 					
 					while(printLine.contentEquals("") != true) {
 						
-						clientController.displayList(printLine);
+						//clientController.displayList(printLine);
+						clientController.insertDataToolTable(printLine);
 						printLine = clientSockets.getSocketIn().readLine();
 						
 					}

@@ -1,6 +1,7 @@
 package clientController;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -43,7 +44,7 @@ public class ClientController {
 		myView.addReduceListener(new ReduceListener());
 		myView.addListActionListener(new ListActionListener());
 		myView.addSearchListener(new SearchListener());
-		myView.addListListener(new ListListener());
+		//myView.addListListener(new ListListener());
 		myView.addIDSelectListener(new idSearchListener());
 		myView.addNameSelectListener(new nameSearchListener());
 		
@@ -82,11 +83,21 @@ public class ClientController {
 	 * 
 	 * @param s
 	 */
-	public void displayList(String s) {		
-		for(String line: s.split("\n")) {
-			myView.getListModel().addElement(line);
+//	public void displayList(String s) {		
+//		for(String line: s.split("\n")) {
+//			myView.getListModel().addElement(line);
+//		}
+//		
+//	}
+	
+	public void insertDataToolTable(String s) {
+		
+		ArrayList<String> rowInfo = new ArrayList<String>();
+		for(String data: s.split(" ")) {
+			rowInfo.add(data);
 		}
 		
+		myView.getTableModel().addRow(new Object[] {rowInfo.get(0), rowInfo.get(1), rowInfo.get(2), rowInfo.get(3)});
 	}
 	
 	/**
@@ -122,7 +133,6 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			myView.getListModel().removeAllElements();
 			clientSockets.sendString("1");
 		}
 

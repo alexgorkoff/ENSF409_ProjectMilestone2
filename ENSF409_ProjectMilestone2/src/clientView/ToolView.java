@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import clientController.*;
 
@@ -65,6 +67,18 @@ public class ToolView extends JFrame {
 	 * Text Field to show the list of tools
 	 */
 	private JTextField selectedTextField;
+	
+	private JTable toolTable;
+	
+	private JScrollPane toolScrollPane;
+	
+	final private Object[] toolTableHeaders = {"Item ID", "Item Name", "Item Quantity", "Item Price"};
+	
+	private Object [][] toolTableData = {};
+	
+	private DefaultTableModel tableModel;
+	
+	
 
 	/**
 	 * The constructor for the main GUI. Creates the main menu and all sub menus
@@ -72,7 +86,8 @@ public class ToolView extends JFrame {
 	 */
 	public ToolView() {
 		addSouthComp();
-		addCentreComp();
+		//addCentreComp();
+		addJTable();
 		addNorthComp();
 		addEastComp();
 		addWestComp();
@@ -168,6 +183,7 @@ public class ToolView extends JFrame {
 	 */
 	public void addSouthComp() {
 		southPanel = new JPanel();
+		southPanel.setMaximumSize(new Dimension(650,100));
 		searchAndCheckBox();
 		createButtonPanel();
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
@@ -196,11 +212,36 @@ public class ToolView extends JFrame {
 	/**
 	 * Create and add components to the centre panel
 	 */
-	public void addCentreComp() {
-		initList();
-		centrePanel = new JPanel();
-		scrollPanel = new JScrollPane(listArea);
-		centrePanel.add(scrollPanel);
+//	public void addCentreComp() {
+//		initList();
+//		centrePanel = new JPanel();
+//		centrePanel.setMaximumSize(new Dimension(650,400));
+//		
+//		scrollPanel = new JScrollPane(listArea);
+//		scrollPanel.setPreferredSize(new Dimension(650, 400));
+//		
+//		centrePanel.add(scrollPanel);
+//	}
+	
+	public void addJTable() {
+		
+		tableModel = new DefaultTableModel();
+		
+		toolTable = new JTable(tableModel);
+		
+		tableModel.addColumn("Item ID");
+		tableModel.addColumn("Item Name");
+		tableModel.addColumn("Item Quantity");
+		tableModel.addColumn("Item Price");
+		
+		toolTable.setPreferredSize(new Dimension(650, 400));
+		toolTable.setFillsViewportHeight(true);
+		
+		toolScrollPane = new JScrollPane(toolTable);
+	}
+	
+	public DefaultTableModel getTableModel() {
+		return tableModel;
 	}
 
 	/**
@@ -209,6 +250,7 @@ public class ToolView extends JFrame {
 	public void addNorthComp() {
 		title = new JLabel("Welcome To The Tool Inventory Manager");
 		northPanel = new JPanel();
+		northPanel.setMaximumSize(new Dimension(650,100));
 		logo = new JLabel();
 		northPanel.add(title);
 	}
@@ -284,9 +326,9 @@ public class ToolView extends JFrame {
 	 * 
 	 * @param listListen
 	 */
-	public void addListListener(ClientController.ListListener listListen) {
-		listArea.addListSelectionListener(listListen);
-	}
+//	public void addListListener(ClientController.ListListener listListen) {
+//		listArea.addListSelectionListener(listListen);
+//	}
 
 	/**
 	 * Linking the View with the Controller by assigning an Action Listener to a
@@ -313,13 +355,19 @@ public class ToolView extends JFrame {
 	 */
 	public void drawFrame() {
 		myFrame = new JFrame("WELCOME");
-		myFrame.add(southPanel, BorderLayout.SOUTH);
-		myFrame.add(centrePanel, BorderLayout.CENTER);
-		myFrame.add(northPanel, BorderLayout.NORTH);
-		myFrame.add(westPanel, BorderLayout.WEST);
-		myFrame.add(eastPanel, BorderLayout.EAST);
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setSize(650, 500);
+		
+		JPanel overallPanel = new JPanel();
+		overallPanel.setLayout(new BoxLayout(overallPanel, BoxLayout.Y_AXIS));
+		
+		overallPanel.add(northPanel);
+		//overallPanel.add(centrePanel);
+		overallPanel.add(toolScrollPane);
+		overallPanel.add(southPanel);
+		
+		myFrame.setContentPane(overallPanel);
+
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
 	}
 
@@ -385,12 +433,16 @@ public class ToolView extends JFrame {
 	 */
 	public void initList() {
 		selectedTextField = new JTextField();
+		
 		listModel = new DefaultListModel<String>();
 		listArea = new JList<String>(listModel);
+		
 		String width = "1234567890123456789012345678901234567890";
+		
 		listArea.setPrototypeCellValue(width);
-		listArea.setFont(new Font("Courier New", Font.BOLD, 8));
-		listArea.setVisibleRowCount(19);
+		listArea.setFont(new Font("Courier New", Font.BOLD, 15));
+		listArea.setVisibleRowCount(12);
+		selectedTextField.setSize(650,400);
 	}
 
 	/**
