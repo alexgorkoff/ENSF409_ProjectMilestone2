@@ -36,12 +36,7 @@ public class SocketPack {
 		}
 	}
 	
-	public void sendStringPrint(String toSend) {
-		socketOut.print(toSend);
-		socketOut.flush();
-	}
-	
-	public void sendStringPrintln(String toSend) {
+	public void sendString(String toSend) {
 		socketOut.println(toSend);
 		socketOut.flush();
 	}

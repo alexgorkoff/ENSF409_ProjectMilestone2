@@ -27,20 +27,20 @@ public class Shop {
 	}
 	
 	public void listAllItems(SocketPack customerSockets) {
-		customerSockets.sendStringPrintln(theInventory.toString());
+		customerSockets.sendString(theInventory.toString());
 		
 	}
 	public String decreaseItem (String name) {
 		if (theInventory.manageItem(name) == null)
-			return "\nCouldn't not decrease item quantity!\n";
+			return "Couldn't not decrease item quantity!";
 		else
-			return "\nItem quantity was decreased!\n";
+			return "Item quantity was decreased!";
 	}
 
 	public void listAllSuppliers(SocketPack customerSockets) {
 		// TODO Auto-generated method stub
 		for (Supplier s: supplierList) {
-			customerSockets.sendStringPrintln(s.toString());
+			customerSockets.sendString(s.toString());
 		}
 		
 	}
@@ -49,7 +49,7 @@ public class Shop {
 		// TODO Auto-generated method stub
 		Item theItem = theInventory.searchForItem(name);
 		if (theItem == null)
-		     return "\nItem " + name + " could not be found!\n";
+		     return "Item " + name + " could not be found!";
 		else
 			 return outputItem (theItem);
 			
@@ -59,7 +59,7 @@ public class Shop {
 		// TODO Auto-generated method stub
 		Item theItem = theInventory.searchForItem(id);
 		if (theItem == null)
-		     return "\nItem number " + id + " could not be found!\n";
+		     return "Item number " + id + " could not be found!";
 		else
 			return outputItem (theItem);
 			 
@@ -67,16 +67,16 @@ public class Shop {
 	}
 	
 	private String outputItem (Item theItem){
-		return "\nThe item information is as follows: \n" + theItem.toString();
+		return "The item information is as follows: " + theItem.toString();
 	}
 
 	public String getItemQuantity(String name) {
 		// TODO Auto-generated method stub
 		int quantity = theInventory.getItemQuantity(name);
 		if (quantity < 0)
-		    return "\nItem " + name + " could not be found!\n";
+		    return "\nItem " + name + " could not be found!";
 		else
-			return "\nThe quantity of Item " + name + " is: " + quantity + "\n";
+			return "\nThe quantity of Item " + name + " is: " + quantity;
 	}
 
 	public String printOrder() {

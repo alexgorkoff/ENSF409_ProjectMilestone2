@@ -50,14 +50,21 @@ public class ClientController {
 		clientSockets = theSockets;
 		
 	}
+	
+	public void outputClientGUI(String theOutput) {
+		JOptionPane.showMessageDialog(myView, theOutput);
+	}
+	
 	public ToolView getView() {
 		return myView;
 	}
-	public void sendInputFromUser(String x) {
-		String userSaid = myView.getInput(x);
-		clientSockets.sendStringPrintln(x);
+	public String getToolNameUser() {
+		return myView.getToolName();
 	}
-
+	public String getToolIDUser() {
+		return myView.getToolID();
+	}
+	
 	/**
 	 * The ListListener class to set text to be selected if clicked on
 	 * 
@@ -91,7 +98,7 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			clientSockets.sendStringPrintln("1");
+			clientSockets.sendString("1");
 		}
 
 	}
@@ -110,7 +117,7 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			clientSockets.sendStringPrintln("4");
+			clientSockets.sendString("4");
 		}
 
 	}
@@ -128,7 +135,7 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			clientSockets.sendStringPrintln("5");
+			clientSockets.sendString("5");
 		}
 
 	}
@@ -146,7 +153,7 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			clientSockets.sendStringPrintln("7");
+			clientSockets.sendString("7");
 			myView.getFrame().setVisible(false); // you can't see me!
 			myView.getFrame().dispose(); // Destroy the JFrame object
 		}
@@ -204,7 +211,7 @@ public class ClientController {
 			if (myView.getCheckBox() == 0) {
 				try {
 					int toSearch = Integer.parseInt(myView.getSearch());
-					clientSockets.sendStringPrintln("3");
+					clientSockets.sendString("3");
 				} catch (Exception notNum) {
 					myView.displayErrorMessage("Please enter a numeric value for the ID");
 				}
@@ -212,7 +219,7 @@ public class ClientController {
 			} else if (myView.getCheckBox() == 1) {
 				String toSearch = myView.getSearch();
 				if (!toSearch.equals("")) {
-					clientSockets.sendStringPrintln("2");
+					clientSockets.sendString("2");
 					// SearchName(toSearch);
 				} else {
 					myView.displayErrorMessage("Please enter a tool name");

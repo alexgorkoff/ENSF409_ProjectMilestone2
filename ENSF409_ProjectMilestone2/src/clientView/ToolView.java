@@ -392,9 +392,11 @@ public class ToolView extends JFrame {
 		// error.setFont(bodyFont);
 		JOptionPane.showMessageDialog(this, error);
 	}
-	public String getInput(String s) {
-		String answer = JOptionPane.showInputDialog(this, s);
-		return answer;
+	public String getToolName() {
+		return JOptionPane.showInputDialog(this, "Please enter the tool name: ");
+	}
+	public String getToolID() {
+		return JOptionPane.showInputDialog(this, "Please enter the tool ID: ");
 	}
 
 	/**

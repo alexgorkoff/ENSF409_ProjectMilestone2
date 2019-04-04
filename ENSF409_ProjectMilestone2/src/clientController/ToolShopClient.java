@@ -20,28 +20,31 @@ public class ToolShopClient {
 	public void communicateServer() {
 		try {
 			while(true) {
-				//Read and print anything received by the Server (A null character will mark when to stop reading)
+
 				String read = "";
+				read = clientSockets.getSocketIn().readLine();
+				System.out.println(read);
 				
-				while(true) {
-					read = clientSockets.getSocketIn().readLine();
-					if(read.contains("\0")) {
-						read = read.replace("\0", "");
-						System.out.println(read);
-//						clientController.sendInputFromUser(read);
-						break;
-					}
-					if(read.contentEquals("QUIT")) {
-						return;
-					}
-					
-					System.out.println(read);
-					
+				switch(read) {
+				
+				case "name":
+					clientSockets.sendString(clientController.getToolNameUser());
+					break;
+				
+				case "id":
+					clientSockets.sendString(clientController.getToolIDUser());
+					break;
+				
+				case "OutputQuantity":
+					clientController.outputClientGUI(clientSockets.getSocketIn().readLine());
+					break;
+				
+				case "QUIT": 
+					return;
+				
+				default:
+					break;
 				}
-				
-				read = clientSockets.getStdIn().readLine();
-				clientSockets.getSocketOut().println(read);
-				clientSockets.getSocketOut().flush();
 
 			}
 		}catch(IOException e) {

@@ -94,27 +94,27 @@ public class ServerController implements Runnable {
 	}
 
 	private void printMenuChoices() {
-		customerSockets.sendStringPrintln("Please choose from one of the following options: ");
-		customerSockets.sendStringPrintln("1. List all tools in the inventory.");
-		customerSockets.sendStringPrintln("2. Search for tool by tool name.");
-		customerSockets.sendStringPrintln("3. Search for tool by tool id.");
-		customerSockets.sendStringPrintln("4. Check item quantity.");
-		customerSockets.sendStringPrintln("5. Decrease item quantity.");
-		customerSockets.sendStringPrintln("6. Print today's order.");
-		customerSockets.sendStringPrintln("7. Quit.");
-		customerSockets.sendStringPrintln("");
-		customerSockets.sendStringPrintln("Please enter your selection: \0");
+		customerSockets.sendString("Please choose from one of the following options: ");
+		customerSockets.sendString("1. List all tools in the inventory.");
+		customerSockets.sendString("2. Search for tool by tool name.");
+		customerSockets.sendString("3. Search for tool by tool id.");
+		customerSockets.sendString("4. Check item quantity.");
+		customerSockets.sendString("5. Decrease item quantity.");
+		customerSockets.sendString("6. Print today's order.");
+		customerSockets.sendString("7. Quit.");
+		customerSockets.sendString("");
+		customerSockets.sendString("Please enter your selection: \0");
 	}
 	
-	public String readGUIInput() throws IOException {
-		 
-		StringBuffer input = null;
-		 
-		input = new StringBuffer(customerSockets.getSocketIn().readLine());
-		 
-		return input.toString();
-		 
-	}
+//	public String readGUIInput() throws IOException {
+//		 
+//		StringBuffer input = null;
+//		 
+//		input = new StringBuffer(customerSockets.getSocketIn().readLine());
+//		 
+//		return input.toString();
+//		 
+//	}
 
 	public void menu() throws IOException {
 
@@ -137,7 +137,7 @@ public class ServerController implements Runnable {
 //					continue;
 //				}
 				
-				String choice = readGUIInput();
+				String choice = customerSockets.getSocketIn().readLine();
 
 				switch (choice) {
 
@@ -160,11 +160,10 @@ public class ServerController implements Runnable {
 					printOrder();
 					break;
 				case "7":
-					customerSockets.sendStringPrintln("\nGood Bye!");
-					customerSockets.sendStringPrintln("QUIT");
+					customerSockets.sendString("QUIT");
 					return;
 				default:
-					customerSockets.sendStringPrintln("\nInvalid selection Please try again!");
+					customerSockets.sendString("\nInvalid selection Please try again!");
 					break;
 				}
 			}
@@ -172,75 +171,72 @@ public class ServerController implements Runnable {
 	}
 
 	private void printOrder() {
-		customerSockets.sendStringPrintln(theShop.printOrder());
+		customerSockets.sendString(theShop.printOrder());
 		//Need to pass along customer sockets
 	}
 
 	private void decreaseItem() {
-		
-		String name = getItemName();
+
+		String name  = getItemName();
 //		customerSockets.sendStringPrintln(theShop.decreaseItem(name));
-		JOptionPane.showMessageDialog(null, theShop.decreaseItem(name));
+//		JOptionPane.showMessageDialog(null, theShop.decreaseItem(name));
 		
 	}
 
 	private void checkItemQuantity() {
 		
-		String name = getItemName();
+		String itemName = getItemName();
+		
+		customerSockets.sendString("OutputQuantity");
+		
+		String itemQuantity = theShop.getItemQuantity(itemName);
+		
+		customerSockets.sendString(itemQuantity);
 //		customerSockets.sendStringPrintln(theShop.getItemQuantity(name));
-		JOptionPane.showMessageDialog(null, theShop.getItemQuantity(name));
+//		JOptionPane.showMessageDialog(null, theShop.getItemQuantity(name));
 		
 	}
 
 	private String getItemName() {
 		
-//		try {
-//			customerSockets.sendStringPrintln("Please enter the name of the item: \0");
-//			String line = customerSockets.getSocketIn().readLine();
-			String line = JOptionPane.showInputDialog(null, "Please enter the name of the item:");
-			return line;
-//		} catch(IOException ioe) {
-//			customerSockets.sendStringPrintln("\n*** IOException in getItemName(). ***\n");
-//			return null;
-//		}
-
+		String clientResponse = "";
+		customerSockets.sendString("name");
+		try {
+			 clientResponse = customerSockets.getSocketIn().readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return clientResponse;
 	}
 
 	private int getItemId() {
 		
-		int itemID;
-		
-		while(true) {
-//			try {
-				String line = JOptionPane.showInputDialog(null, "Please enter the ID number of the item:");
-				itemID = Integer.parseInt(line);
-//				customerSockets.sendStringPrintln("Please enter the ID number of the item: \0");
-//				itemID = Integer.parseInt(customerSockets.getSocketIn().readLine());
-				return itemID;
-//			} catch(NumberFormatException nfe) {
-//				customerSockets.sendStringPrintln("\n*** Invalid input. Please enter an integer. ***\n");
-//				continue;
-//			} catch(IOException ioe) {
-//				customerSockets.sendStringPrintln("\n*** IOException in getItemID. ***\n");
-//				continue;
-//			}
+		int itemID = 0;
+
+		String clientResponse = "";
+		customerSockets.sendString("id");
+		try {
+			 clientResponse = customerSockets.getSocketIn().readLine();
+			 itemID = Integer.parseInt(clientResponse);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	}
+		return itemID;
+		}
 
 	private void searchForItemById() {
 
 		int id;
 	
 		id = getItemId();
-		JOptionPane.showMessageDialog(null, theShop.getItem(id));
-//		customerSockets.sendStringPrintln(theShop.getItem(id));
+
 		
 	}
 
 	private void searchForItemByName() {
 
 		String name = getItemName();
-		JOptionPane.showMessageDialog(null, theShop.getItem(name));
+//		JOptionPane.showMessageDialog(null, theShop.getItem(name));
 		//customerSockets.sendStringPrintln(theShop.getItem(name));
 
 	}
