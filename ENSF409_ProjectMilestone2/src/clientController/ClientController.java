@@ -93,7 +93,7 @@ public class ClientController {
 	public void insertDataToolTable(String s) {
 		
 		ArrayList<String> rowInfo = new ArrayList<String>();
-		for(String data: s.split(" ")) {
+		for(String data: s.split(",")) {
 			rowInfo.add(data);
 		}
 		
