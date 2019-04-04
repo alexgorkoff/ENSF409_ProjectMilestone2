@@ -2,6 +2,8 @@ package serverController;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,20 +14,61 @@ public class ServerController implements Runnable {
 	private ArrayList<Supplier> suppliers;
 	private Inventory theInventory;
 	private Shop theShop;
+	private Database allInfo;
 	
 	private SocketPack customerSockets;
 
 	public ServerController(Socket theSocket) {
-		suppliers = new ArrayList<Supplier>();
-		readSuppliers();
-		theInventory = new Inventory(readItems());
+		allInfo = new Database();
+		try {
+			suppliers = processSupplierResult();
+			theInventory = processItemResult();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		theShop = new Shop(theInventory, suppliers);
 		
 		customerSockets = new SocketPack(theSocket);
 		
 	}
 
-	private ArrayList<Item> readItems() {
+	
+	/**
+	 * Function that processes the data in both the tables.
+	 * @throws SQLException
+	 */
+	public ArrayList<Supplier> processSupplierResult() throws SQLException
+	{
+		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
+		ResultSet results = allInfo.getMyStatement().executeQuery("select * from suppliers"); 
+		ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+		while(results.next())
+		{
+			supplierList.add(new Supplier(results.getInt("SupplierID"),results.getString("SupplierName"),results.getString("SupplierAddress"),results.getString("SupplierContact")));
+		}
+		return supplierList;
+	}
+	
+	public Inventory processItemResult() throws SQLException
+	{
+		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
+		ResultSet results = allInfo.getMyStatement().executeQuery("select * from items"); 
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		
+		while(results.next())
+		{
+			itemList.add(new Item(results.getInt("ItemID"),results.getString("ItemName"),results.getInt("ItemQuantity"),results.getDouble("ItemPrice"),findSupplier(results.getInt("SupplierID"))));
+		}
+		Inventory inv = new Inventory(itemList);
+		allInfo.setTheInventory(inv);
+		return inv;
+	}
+	
+	
+	
+	/*private ArrayList<Item> readItems() {
 
 		ArrayList<Item> items = new ArrayList<Item>();
 
@@ -50,7 +93,7 @@ public class ServerController implements Runnable {
 			System.out.println(e.getMessage());
 		}
 		return items;
-	}
+	}*/
 
 	/*
 	 * Finds the supplier which matches the supplierID
@@ -69,7 +112,7 @@ public class ServerController implements Runnable {
 		return theSupplier;
 	}
 
-	private void readSuppliers() {
+	/*private void readSuppliers() {
 
 		try {
 			FileReader fr = new FileReader("suppliers.txt");
@@ -84,7 +127,7 @@ public class ServerController implements Runnable {
 			System.out.println(e.getMessage());
 		}
 
-	}
+	}*/
 
 	private void printMenuChoices() {
 		customerSockets.sendStringPrintln("Please choose from one of the following options: ");
@@ -135,6 +178,7 @@ public class ServerController implements Runnable {
 					break;
 				case 5:
 					decreaseItem();
+					allInfo.writeToItemTable();
 					break;
 				case 6:
 					printOrder();

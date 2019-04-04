@@ -34,6 +34,7 @@ public class Shop {
 		if (theInventory.manageItem(name) == null)
 			return "\nCouldn't not decrease item quantity!\n";
 		else
+			
 			return "\nItem quantity was decreased!\n";
 	}
 
