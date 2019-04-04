@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,46 +29,54 @@ public class ServerController implements Runnable, SessionID {
 	private Inventory theInventory;
 	private Shop theShop;
 	private SocketPack customerSockets;
+	private Database allInfo;
 	
 	private String sessionID;
 
 	public ServerController(Socket theSocket) {
+		allInfo = new Database();
+		try {
+			suppliers = processSupplierResult();
+			theInventory = processItemResult();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		suppliers = new ArrayList<Supplier>();
-		readSuppliers();
-		theInventory = new Inventory(readItems());
 		theShop = new Shop(theInventory, suppliers);
 		
 		customerSockets = new SocketPack(theSocket);
 		
 	}
 
-	private ArrayList<Item> readItems() {
-
-		ArrayList<Item> items = new ArrayList<Item>();
-
-		try {
-			FileReader fr = new FileReader("items.txt");
-			BufferedReader br = new BufferedReader(fr);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				String[] temp = line.split(";");
-				int supplierId = Integer.parseInt(temp[4]);
-
-				Supplier theSupplier = findSupplier(supplierId);
-				if (theSupplier != null) {
-					Item myItem = new Item(Integer.parseInt(temp[0]), temp[1], Integer.parseInt(temp[2]),
-							Double.parseDouble(temp[3]), theSupplier);
-					items.add(myItem);
-					theSupplier.getItemList().add(myItem);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+	public ArrayList<Supplier> processSupplierResult() throws SQLException
+	{
+		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
+		ResultSet results = allInfo.getMyStatement().executeQuery("select * from suppliers"); 
+		ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+		while(results.next())
+		{
+			supplierList.add(new Supplier(results.getInt("SupplierID"),results.getString("SupplierName"),results.getString("SupplierAddress"),results.getString("SupplierContact")));
 		}
-		return items;
+		return supplierList;
 	}
+	
+	public Inventory processItemResult() throws SQLException
+	{
+		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
+		ResultSet results = allInfo.getMyStatement().executeQuery("select * from items"); 
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		
+		while(results.next())
+		{
+			itemList.add(new Item(results.getInt("ItemID"),results.getString("ItemName"),results.getInt("ItemQuantity"),results.getDouble("ItemPrice"),findSupplier(results.getInt("SupplierID"))));
+		}
+		Inventory inv = new Inventory(itemList);
+		allInfo.setTheInventory(inv);
+		return inv;
+	}
+	
+	
 
 	/*
 	 * Finds the supplier which matches the supplierID
@@ -85,22 +95,6 @@ public class ServerController implements Runnable, SessionID {
 		return theSupplier;
 	}
 
-	private void readSuppliers() {
-
-		try {
-			FileReader fr = new FileReader("suppliers.txt");
-			BufferedReader br = new BufferedReader(fr);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				String[] temp = line.split(";");
-				suppliers.add(new Supplier(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3]));
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
 
 	public void menu() throws IOException {
 			
@@ -129,6 +123,7 @@ public class ServerController implements Runnable, SessionID {
 				case "5":
 					sessionID = DECREASE_QUANTITY;
 					decreaseItem();
+					allInfo.writeToItemTable();
 					break;
 				case "6":
 					sessionID = PRINT_ORDER;
