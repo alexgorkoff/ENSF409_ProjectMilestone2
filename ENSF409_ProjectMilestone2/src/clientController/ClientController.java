@@ -19,12 +19,12 @@ import serverModel.SocketPack;
  * @since March 29, 2019
  */
 public class ClientController {
-	
+
 	/**
 	 * View that is part of the GUI Controller
 	 */
 	private ToolView myView;
-	
+
 	/**
 	 * Client SocketPack
 	 */
@@ -36,21 +36,21 @@ public class ClientController {
 	 * @param theView View which holds all of the panel componenets
 	 */
 	public ClientController(SocketPack theSockets) {
-		
+
 		myView = new ToolView();
-		
+
 		myView.addQuitListener(new QuitListener());
 		myView.addQuantityListener(new QuantityListener());
 		myView.addReduceListener(new ReduceListener());
 		myView.addListActionListener(new ListActionListener());
 		myView.addSearchListener(new SearchListener());
-		//myView.addListListener(new ListListener());
 		myView.addIDSelectListener(new idSearchListener());
 		myView.addNameSelectListener(new nameSearchListener());
-		
+
 		clientSockets = theSockets;
-		
+
 	}
+
 	/**
 	 * 
 	 * @param theOutput
@@ -58,6 +58,7 @@ public class ClientController {
 	public void outputClientGUI(String theOutput) {
 		JOptionPane.showMessageDialog(myView, theOutput);
 	}
+
 	/**
 	 * 
 	 * @return
@@ -65,6 +66,7 @@ public class ClientController {
 	public ToolView getView() {
 		return myView;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -72,6 +74,7 @@ public class ClientController {
 	public String getToolNameUser() {
 		return myView.getToolName();
 	}
+
 	/**
 	 * 
 	 * @return
@@ -79,28 +82,17 @@ public class ClientController {
 	public String getToolIDUser() {
 		return myView.getToolID();
 	}
-	/**
-	 * 
-	 * @param s
-	 */
-//	public void displayList(String s) {		
-//		for(String line: s.split("\n")) {
-//			myView.getListModel().addElement(line);
-//		}
-//		
-//	}
-	
+
 	public void insertDataToolTable(String s) {
-		for(int row = 0; row < myView.getTableModel().getRowCount(); row++) {
-			myView.getTableModel().removeRow(row);
-		}
+
 		ArrayList<String> rowInfo = new ArrayList<String>();
-		for(String data: s.split(",")) {
+		for (String data : s.split(",")) {
+			System.out.println("Im swag");
 			rowInfo.add(data);
 		}
-		myView.getTableModel().addRow(new Object[] {rowInfo.get(0), rowInfo.get(1), rowInfo.get(2), rowInfo.get(3)});
+		myView.getTableModel().addRow(new Object[] { rowInfo.get(0), rowInfo.get(1), rowInfo.get(2), rowInfo.get(3) });
 	}
-	
+
 	/**
 	 * The ListListener class to set text to be selected if clicked on
 	 * 
