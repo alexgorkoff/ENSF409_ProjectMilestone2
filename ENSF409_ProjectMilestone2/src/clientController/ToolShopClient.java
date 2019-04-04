@@ -84,10 +84,10 @@ public class ToolShopClient implements SessionID{
 	}
 	
 	public static void main(String [] args) throws UnknownHostException, InterruptedException {
-		InetAddress ip;
-		ip = InetAddress.getLocalHost();
+		//InetAddress ip;
+		//ip = InetAddress.getLocalHost();
 
-		ToolShopClient toolShopClient = new ToolShopClient(ip.getHostAddress().toString(), 8099);
+		ToolShopClient toolShopClient = new ToolShopClient("10.13.77.106", 8099);
 		toolShopClient.communicateServer();
 	}
 	
