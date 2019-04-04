@@ -224,17 +224,15 @@ public class ToolView extends JFrame {
 //	}
 	
 	public void addJTable() {
-		
 		tableModel = new DefaultTableModel();
 		
 		toolTable = new JTable(tableModel);
-		
 		tableModel.addColumn("Item ID");
 		tableModel.addColumn("Item Name");
 		tableModel.addColumn("Item Quantity");
 		tableModel.addColumn("Item Price");
 		
-		toolTable.setPreferredSize(new Dimension(650, 400));
+		//toolTable.setPreferredSize(new Dimension(650, 400));
 		toolTable.setFillsViewportHeight(true);
 		
 		toolScrollPane = new JScrollPane(toolTable);		
@@ -244,6 +242,9 @@ public class ToolView extends JFrame {
 	
 	public DefaultTableModel getTableModel() {
 		return tableModel;
+	}
+	public JTable getTable() {
+		return toolTable;
 	}
 
 	/**

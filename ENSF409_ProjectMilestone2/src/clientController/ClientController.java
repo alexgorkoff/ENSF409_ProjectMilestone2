@@ -91,12 +91,11 @@ public class ClientController {
 //	}
 	
 	public void insertDataToolTable(String s) {
-		
+		myView.getTable().removeAll();
 		ArrayList<String> rowInfo = new ArrayList<String>();
 		for(String data: s.split(",")) {
 			rowInfo.add(data);
 		}
-		
 		myView.getTableModel().addRow(new Object[] {rowInfo.get(0), rowInfo.get(1), rowInfo.get(2), rowInfo.get(3)});
 	}
 	
