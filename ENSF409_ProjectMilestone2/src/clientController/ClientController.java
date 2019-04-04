@@ -112,6 +112,7 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			myView.getListModel().removeAllElements();
 			clientSockets.sendString("1");
 		}
 
