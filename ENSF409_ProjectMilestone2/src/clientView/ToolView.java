@@ -28,19 +28,19 @@ public class ToolView extends JFrame {
 	 */
 	private JFrame myFrame;
 	/**
-	 * Panels to bundle together componenets that are supposed to be together
+	 * Panels to bundle together components that are supposed to be together
 	 */
 	private JPanel southPanel, centrePanel, northPanel, westPanel, eastPanel, checkBoxPanel, searchPanel, buttonPanel,
 			searchAndCheckBox;
 	/**
-	 * Buttons for the user to manuever around the GUI
+	 * Buttons for the user to maneuver around the GUI
 	 */
 	private JButton idSearch, quantityCheck, buyItem, quit, listTool;
 	/**
 	 * Contain any text and images
 	 */
-	private JLabel searchIDLabel, searchNameLabel, title, logo, SearchLabel, searchLogo, listLogo, quantityLogo,
-			quitLogo, reduceLogo;
+	private JLabel searchIDLabel, searchNameLabel, title, searchLogo;
+			
 	/**
 	 * Allow the user to enter input to search
 	 */
@@ -50,7 +50,7 @@ public class ToolView extends JFrame {
 	 */
 	private JCheckBox idSelect, nameSelect;
 	/**
-	 * Scrollable panle to contain the list of all tools
+	 * Scrollable panel to contain the list of all tools
 	 */
 	private JScrollPane scrollPanel;
 	/**
