@@ -16,7 +16,9 @@ import java.util.Calendar;
 
 public class Order {
 	
-	
+	/**
+	 * Date object indicating 
+	 */
 	private Date today;
 	private int orderId;
 	private ArrayList <OrderLine> orderLines;
