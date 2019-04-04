@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import serverController.SessionID;
+import interfaces.*;
 import serverModel.*;
 
 public class ToolShopClient implements SessionID{

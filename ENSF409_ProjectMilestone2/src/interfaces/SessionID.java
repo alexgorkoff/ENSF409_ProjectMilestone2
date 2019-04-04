@@ -1,4 +1,5 @@
-package serverController;
+package interfaces;
+
 
 public interface SessionID {
 	
