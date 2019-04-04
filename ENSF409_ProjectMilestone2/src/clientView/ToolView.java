@@ -237,7 +237,9 @@ public class ToolView extends JFrame {
 		toolTable.setPreferredSize(new Dimension(650, 400));
 		toolTable.setFillsViewportHeight(true);
 		
-		toolScrollPane = new JScrollPane(toolTable);
+		toolScrollPane = new JScrollPane(toolTable);		
+		toolScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		toolScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
 	
 	public DefaultTableModel getTableModel() {
