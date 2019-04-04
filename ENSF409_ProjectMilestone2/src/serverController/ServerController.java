@@ -101,7 +101,7 @@ public class ServerController implements Runnable, SessionID {
 
 				case "1":
 					sessionID = LIST_ALL_ITEMS;
-					theShop.listAllItems(customerSockets);
+					listAllItems();
 					break;
 				case "2":
 					sessionID = SEARCH_ITEM_NAME;
@@ -142,6 +142,8 @@ public class ServerController implements Runnable, SessionID {
 	private void decreaseItem() {
 
 		String name  = getItemName();
+		String itemReduce = theShop.decreaseItem(name);
+		customerSockets.sendString(itemReduce);
 //		customerSockets.sendStringPrintln(theShop.decreaseItem(name));
 //		JOptionPane.showMessageDialog(null, theShop.decreaseItem(name));
 		
@@ -188,19 +190,37 @@ public class ServerController implements Runnable, SessionID {
 
 	private void searchForItemById() {
 
-		int id;
-	
-		id = getItemId();
+		int itemID = 0;
+		customerSockets.sendString(sessionID);
+		try {
+			 itemID = Integer.parseInt(customerSockets.getSocketIn().readLine());
+			 customerSockets.sendString(theShop.getItem(itemID));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		
 	}
 
 	private void searchForItemByName() {
 
-		String name = getItemName();
+		String name = "";
+		customerSockets.sendString(sessionID);
+		try {
+			 name = customerSockets.getSocketIn().readLine();
+			 customerSockets.sendString(theShop.getItem(name));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 //		JOptionPane.showMessageDialog(null, theShop.getItem(name));
 		//customerSockets.sendStringPrintln(theShop.getItem(name));
 
+	}
+	public void listAllItems() {
+		customerSockets.sendString(sessionID);
+		theShop.listAllItems(customerSockets);
 	}
 
 	@Override

@@ -408,7 +408,7 @@ public class ToolView extends JFrame {
 		listArea = new JList<String>(listModel);
 		String width = "1234567890123456789012345678901234567890";
 		listArea.setPrototypeCellValue(width);
-		listArea.setFont(new Font("Courier New", Font.BOLD, 20));
+		listArea.setFont(new Font("Courier New", Font.BOLD, 8));
 		listArea.setVisibleRowCount(19);
 	}
 

@@ -26,7 +26,7 @@ public class ToolShopClient implements SessionID{
 				
 					sessionLabel = clientSockets.getSocketIn().readLine();
 					System.out.println(sessionLabel);
-				
+						
 				switch(sessionLabel) {
 				
 				case GET_ITEM_QUANTITY:
@@ -36,9 +36,30 @@ public class ToolShopClient implements SessionID{
 					break;
 				
 				case DECREASE_QUANTITY:
-					clientSockets.sendString(clientController.getToolIDUser());
+					clientSockets.sendString(clientController.getToolNameUser());
+					//clientSockets.getSocketIn().readLine(); //Have no idea where this space is being read from
+					clientController.outputClientGUI(clientSockets.getSocketIn().readLine());					
 					break;
-				
+				case SEARCH_ITEM_NAME:
+					clientSockets.sendString(clientController.getView().getSearch());
+					clientController.outputClientGUI(clientSockets.getSocketIn().readLine());					
+					break;
+				case SEARCH_ITEM_ID:
+					clientSockets.sendString(clientController.getView().getSearch());
+					clientController.outputClientGUI(clientSockets.getSocketIn().readLine());					
+					break;
+				case LIST_ALL_ITEMS:
+					
+					String printLine = clientSockets.getSocketIn().readLine();
+					
+					while(printLine.contentEquals("") != true) {
+						
+						clientController.displayList(printLine);
+						printLine = clientSockets.getSocketIn().readLine();
+						
+					}
+					break;
+					
 				case QUIT: 
 					return;
 				

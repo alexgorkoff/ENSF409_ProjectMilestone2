@@ -64,6 +64,20 @@ public class ClientController {
 	public String getToolIDUser() {
 		return myView.getToolID();
 	}
+	public void displayList(String s) {
+		
+//		String itemInfo[] = s.split("\n");
+//		System.out.println("{"+s+"}");
+//		for(int i = 0; i < itemInfo.length; i++) {
+//			myView.getListModel().addElement(itemInfo[i]);
+//			//System.out.println("/"+itemInfo[i]+"/");
+//		}
+		
+		for(String line: s.split("\n")) {
+			myView.getListModel().addElement(line);
+		}
+		
+	}
 	
 	/**
 	 * The ListListener class to set text to be selected if clicked on

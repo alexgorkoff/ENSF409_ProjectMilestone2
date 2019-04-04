@@ -27,12 +27,16 @@ public class Shop {
 	}
 	
 	public void listAllItems(SocketPack customerSockets) {
-		customerSockets.sendString(theInventory.toString());
+		
+		String item = theInventory.toString();
+		//for(String s: item.split("\n")) {
+			customerSockets.sendString(item);	
+		//}
 		
 	}
 	public String decreaseItem (String name) {
 		if (theInventory.manageItem(name) == null)
-			return "Couldn't not decrease item quantity!";
+			return "Couldn't decrease item quantity!";
 		else
 			return "Item quantity was decreased!";
 	}
