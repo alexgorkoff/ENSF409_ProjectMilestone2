@@ -39,7 +39,7 @@ public class ToolView extends JFrame {
 	/**
 	 * Contain any text and images
 	 */
-	private JLabel searchIDLabel, searchNameLabel, title, searchLogo;
+	private JLabel searchIDLabel, searchNameLabel, title, searchLogo, SearchLabel, logo;
 			
 	/**
 	 * Allow the user to enter input to search
