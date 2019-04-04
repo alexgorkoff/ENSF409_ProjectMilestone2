@@ -110,7 +110,6 @@ public class ClientController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String toolName = JOptionPane.showInputDialog("Enter The Tool Name:");
 			clientSockets.sendStringPrintln("4");
 		}
 
