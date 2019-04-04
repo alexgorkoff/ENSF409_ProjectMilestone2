@@ -87,7 +87,7 @@ public class ToolShopClient implements SessionID{
 		//InetAddress ip;
 		//ip = InetAddress.getLocalHost();
 
-		ToolShopClient toolShopClient = new ToolShopClient("25.72.31.28", 443);
+		ToolShopClient toolShopClient = new ToolShopClient("25.72.31.28", 8099);
 		toolShopClient.communicateServer();
 	}
 	
