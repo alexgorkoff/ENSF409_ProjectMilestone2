@@ -1,5 +1,6 @@
 package serverController;
 import java.awt.event.ActionEvent;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,6 +10,15 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import serverModel.*;
+
+/**
+ * Server side controller, directs client 
+ * requests to perform any backend actions.
+ * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+ * @version 1.0
+ * @since April 4th, 2019
+ *
+ */
 
 public class ServerController implements Runnable, SessionID {
 
