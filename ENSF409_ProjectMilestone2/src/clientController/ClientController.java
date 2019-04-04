@@ -50,29 +50,39 @@ public class ClientController {
 		clientSockets = theSockets;
 		
 	}
-	
+	/**
+	 * 
+	 * @param theOutput
+	 */
 	public void outputClientGUI(String theOutput) {
 		JOptionPane.showMessageDialog(myView, theOutput);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public ToolView getView() {
 		return myView;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getToolNameUser() {
 		return myView.getToolName();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getToolIDUser() {
 		return myView.getToolID();
 	}
-	public void displayList(String s) {
-		
-//		String itemInfo[] = s.split("\n");
-//		System.out.println("{"+s+"}");
-//		for(int i = 0; i < itemInfo.length; i++) {
-//			myView.getListModel().addElement(itemInfo[i]);
-//			//System.out.println("/"+itemInfo[i]+"/");
-//		}
-		
+	/**
+	 * 
+	 * @param s
+	 */
+	public void displayList(String s) {		
 		for(String line: s.split("\n")) {
 			myView.getListModel().addElement(line);
 		}
@@ -230,12 +240,10 @@ public class ClientController {
 				} catch (Exception notNum) {
 					myView.displayErrorMessage("Please enter a numeric value for the ID");
 				}
-				// SearchID(toSearch);
 			} else if (myView.getCheckBox() == 1) {
 				String toSearch = myView.getSearch();
 				if (!toSearch.equals("")) {
 					clientSockets.sendString("2");
-					// SearchName(toSearch);
 				} else {
 					myView.displayErrorMessage("Please enter a tool name");
 				}
