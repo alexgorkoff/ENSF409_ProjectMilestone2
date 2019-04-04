@@ -39,7 +39,7 @@ public class ToolShopServer {
 	
 	
 	public static void main(String [] args) throws IOException {
-		ToolShopServer toolShopServer = new ToolShopServer(443);
+		ToolShopServer toolShopServer = new ToolShopServer(8099);
 		System.out.println("The Tool Shop Server is up and running!");
 		toolShopServer.communicateWithClient();
 	}
