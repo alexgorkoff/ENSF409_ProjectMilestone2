@@ -33,7 +33,7 @@ public class ClientController {
 	/**
 	 * Constructor to initialize all of the listeners
 	 * 
-	 * @param theView View which holds all of the panel componenets
+	 * @param theSockets which holds all of the socket information of the Client
 	 */
 	public ClientController(SocketPack theSockets) {
 
@@ -52,42 +52,50 @@ public class ClientController {
 	}
 
 	/**
+	 * used to sent a message to the user via a GUI system
 	 * 
-	 * @param theOutput
+	 * @param theOutput the message to send to the user
 	 */
 	public void outputClientGUI(String theOutput) {
 		JOptionPane.showMessageDialog(myView, theOutput);
 	}
 
 	/**
+	 * getter for the View
 	 * 
-	 * @return
+	 * @return myView
 	 */
 	public ToolView getView() {
 		return myView;
 	}
 
 	/**
+	 * Used to invoke a method in view to get the tool name from the user
 	 * 
-	 * @return
+	 * @return the tool name the user inputs
 	 */
 	public String getToolNameUser() {
 		return myView.getToolName();
 	}
 
 	/**
+	 * Used to invoke a method in view to get the tool ID from the user
 	 * 
-	 * @return
+	 * @return the tool ID the user inputs
 	 */
 	public String getToolIDUser() {
 		return myView.getToolID();
 	}
 
+	/**
+	 * insert the data item into the table
+	 * 
+	 * @param s the information to display in the JTable
+	 */
 	public void insertDataToolTable(String s) {
 
 		ArrayList<String> rowInfo = new ArrayList<String>();
 		for (String data : s.split(",")) {
-			System.out.println("Im swag");
 			rowInfo.add(data);
 		}
 		myView.getTableModel().addRow(new Object[] { rowInfo.get(0), rowInfo.get(1), rowInfo.get(2), rowInfo.get(3) });

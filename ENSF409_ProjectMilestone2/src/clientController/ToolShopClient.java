@@ -8,11 +8,30 @@ import java.net.UnknownHostException;
 import interfaces.*;
 import serverModel.*;
 
+/**
+ * The Client on the server that will serve as the user of the toolshop system.
+ * Sending messages back and forth between the server to communicate
+ * 
+ * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
+ * @version 1.2.0
+ * @since March 29, 2019
+ */
 public class ToolShopClient implements SessionID {
-
+	/**
+	 * The SocketPack of the client that it will use to communicate with the server
+	 */
 	private SocketPack clientSockets;
+	/**
+	 * The controller that will be used as part of the client to control the GUI
+	 */
 	private ClientController clientController;
 
+	/**
+	 * Constructor for the ToolShop Client to connec to the server
+	 * 
+	 * @param portName   to connect to
+	 * @param portNumber to connect to
+	 */
 	public ToolShopClient(String portName, int portNumber) {
 
 		clientSockets = new SocketPack(portName, portNumber);
@@ -20,6 +39,12 @@ public class ToolShopClient implements SessionID {
 
 	}
 
+	/**
+	 * synchronized method that will be used to send messages back and forth from
+	 * the server and will respond according to the message received from the server
+	 * 
+	 * @throws InterruptedException
+	 */
 	public synchronized void communicateServer() throws InterruptedException {
 		try {
 			while (true) {
