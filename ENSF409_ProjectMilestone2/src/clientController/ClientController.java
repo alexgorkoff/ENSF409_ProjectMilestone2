@@ -59,6 +59,20 @@ public class ClientController {
 	public void outputClientGUI(String theOutput) {
 		JOptionPane.showMessageDialog(myView, theOutput);
 	}
+	
+//	public void outputClientToolInfo(String theOutput) {
+//		ArrayList<String> toolInfo = new ArrayList<String>();
+//		
+//		for(String info:theOutput.split(",")) {
+//			toolInfo.add(info);
+//		}
+//		
+//		String formattedOutput = 
+//				"Tool ID: " + toolInfo.get(0) + "\nTool Name: " + toolInfo.get(1) 
+//					+ "\nQuantity: " + toolInfo.get(2) + "\nPrice: " + toolInfo.get(3);
+//		
+//		JOptionPane.showMessageDialog(myView, formattedOutput);
+//	}
 
 	/**
 	 * getter for the View

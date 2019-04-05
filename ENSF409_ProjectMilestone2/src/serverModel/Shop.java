@@ -144,7 +144,12 @@ public class Shop {
 	 * @return String: the item information
 	 */
 	private String outputItem (Item theItem){
-		return "The item information is as follows: " + theItem.toString();
+		
+		String theOutput = 
+				"Tool ID: " + theItem.getItemId() + "\nTool Name: " + theItem.getItemName() 
+				+ "\nQuantity: " + theItem.getItemQuantity() + "\nPrice: " + theItem.getItemPrice();
+		
+		return "The item information is as follows: " + theOutput;
 	}
 
 	/**
