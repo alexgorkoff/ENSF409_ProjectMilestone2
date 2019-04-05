@@ -173,7 +173,8 @@ public class ServerController implements Runnable, SessionID {
 					printOrder();
 					break;
 				case "7":
-					customerSockets.sendString("QUIT");
+					sessionID = QUIT;
+					customerSockets.sendString(sessionID);
 					return;
 				default:
 					customerSockets.sendString("\nInvalid selection Please try again!");
