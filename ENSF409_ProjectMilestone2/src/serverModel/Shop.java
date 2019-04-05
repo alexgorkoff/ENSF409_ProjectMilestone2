@@ -146,8 +146,8 @@ public class Shop {
 	private String outputItem (Item theItem){
 		
 		String theOutput = 
-				"\\ Tool ID: " + theItem.getItemId() + "\\ Tool Name: " + theItem.getItemName() 
-				+ "\\ Quantity: " + theItem.getItemQuantity() + "\\ Price: " + theItem.getItemPrice() + "\\";
+				" -- Tool ID: " + theItem.getItemId() + " -- Tool Name: " + theItem.getItemName() 
+				+ " -- Quantity: " + theItem.getItemQuantity() + " -- Price: " + theItem.getItemPrice() + " --";
 		
 		return "The item information is as follows: " + theOutput;
 	}
