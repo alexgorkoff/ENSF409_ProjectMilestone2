@@ -17,6 +17,7 @@ import serverModel.*;
 /**
  * Server side controller, directs client 
  * requests to perform any backend actions.
+ * 
  * @author Muhammad Farooq, Alex Gorkoff, Matteo Messana
  * @version 1.0
  * @since April 4th, 2019
@@ -25,14 +26,41 @@ import serverModel.*;
 
 public class ServerController implements Runnable, SessionID {
 
+	/**
+	 * List to maintain record of all suppliers in the inventory system
+	 */
 	private ArrayList<Supplier> suppliers;
+	
+	/**
+	 * Object used to maintain the inventory of the store
+	 */
 	private Inventory theInventory;
+	
+	/**
+	 * Reference to the store associated with the Inventory and Suppliers
+	 */
 	private Shop theShop;
+	
+	/**
+	 * Object containing streams to facilitate client/server communication
+	 */
 	private SocketPack customerSockets;
+	
+	/**
+	 * Reference to the database from which Inventory and Supplier information is retrieved and updated
+	 */
 	private Database allInfo;
 	
+	/**
+	 * Indicates the state of the program as directed by the client side of the application (GUI Action Listeners)
+	 * Data member will direct client side to retrieve certain information from user for further use in the back end
+	 */
 	private String sessionID;
 
+	/**
+	 * Constructor of type ServerController
+	 * @param theSocket : input socket from the server, used to derive input/output streams for client/server communication
+	 */
 	public ServerController(Socket theSocket) {
 		allInfo = new Database();
 		try {
@@ -49,6 +77,11 @@ public class ServerController implements Runnable, SessionID {
 		
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Supplier> processSupplierResult() throws SQLException
 	{
 		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
@@ -61,6 +94,11 @@ public class ServerController implements Runnable, SessionID {
 		return supplierList;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public Inventory processItemResult() throws SQLException
 	{
 		allInfo.setMyStatement(allInfo.getMyConnection().createStatement());
@@ -78,10 +116,10 @@ public class ServerController implements Runnable, SessionID {
 	
 	
 
-	/*
-	 * Finds the supplier which matches the supplierID
-	 * @param supplierId
-	 * @return theSupplier
+	/**
+	 * Searches for and Retrieves a supplier, as indicated by the supplierID
+	 * @param supplierId : the ID number associated with a particular supplier
+	 * @return theSupplier : theSupplier (if found) pertaining to an ID number
 	 */
 	private Supplier findSupplier(int supplierId) {
 		Supplier theSupplier = null;
@@ -95,7 +133,12 @@ public class ServerController implements Runnable, SessionID {
 		return theSupplier;
 	}
 
-
+	/**
+	 * Receives directives from the client side (GUI Action Listeners)
+	 * Sets sessionID based on the above input
+	 * Contacts back end methods in order to fulfill the request of the user on the client side
+	 * @throws IOException
+	 */
 	public void menu() throws IOException {
 			
 			while (true) {
@@ -140,21 +183,27 @@ public class ServerController implements Runnable, SessionID {
 
 	}
 
+	/**
+	 * Outputs the Order to the client side
+	 */
 	private void printOrder() {
 		customerSockets.sendString(theShop.printOrder());
-		//Need to pass along customer sockets
 	}
 
+	/**
+	 * Reduces the quantity of an item as indicated by the user (searched by name)
+	 */
 	private void decreaseItem() {
 
 		String name  = getItemName();
 		String itemReduce = theShop.decreaseItem(name);
 		customerSockets.sendString(itemReduce);
-//		customerSockets.sendStringPrintln(theShop.decreaseItem(name));
-//		JOptionPane.showMessageDialog(null, theShop.decreaseItem(name));
 		
 	}
 
+	/**
+	 * Retrieves the item quantity as indicated by the user (searched by name)
+	 */
 	private synchronized void checkItemQuantity() {
 		
 		String itemName = getItemName();
@@ -162,11 +211,14 @@ public class ServerController implements Runnable, SessionID {
 		String itemQuantity = theShop.getItemQuantity(itemName);
 		
 		customerSockets.sendString(itemQuantity);
-//		customerSockets.sendStringPrintln(theShop.getItemQuantity(name));
-//		JOptionPane.showMessageDialog(null, theShop.getItemQuantity(name));
 		
 	}
 
+	/**
+	 * Communicates the sessionID to the client side
+	 * Expects a response from the client side (a user input of an item name)
+	 * @return clientResponse : the name of the item to be located
+	 */
 	private String getItemName() {
 		
 		String clientResponse = "";
@@ -179,6 +231,11 @@ public class ServerController implements Runnable, SessionID {
 		return clientResponse;
 	}
 
+	/**
+	 * Communicates the sessionID to the client side
+	 * Expects a response from the client side (a user input of an item ID)
+	 * @return itemID : the ID of the item to be located
+	 */
 	private int getItemId() {
 		
 		int itemID = 0;
@@ -194,6 +251,11 @@ public class ServerController implements Runnable, SessionID {
 		return itemID;
 		}
 
+	/**
+	 * Communicates a sessionID to the client side
+	 * Expects a response from the client side (an item ID, as indicated by user)
+	 * Returns results from a search of whether or not an item is located in inventory
+	 */
 	private void searchForItemById() {
 
 		int itemID = 0;
@@ -204,11 +266,14 @@ public class ServerController implements Runnable, SessionID {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
-		
+		}	
 	}
 
+	/**
+	 * Communicates a sessionID to the client side
+	 * Expects a response from the client side (an item name, as indicated by user)
+	 * Returns results from a search of whether or not an item is located in inventory
+	 */
 	private void searchForItemByName() {
 
 		String name = "";
@@ -220,15 +285,21 @@ public class ServerController implements Runnable, SessionID {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		JOptionPane.showMessageDialog(null, theShop.getItem(name));
-		//customerSockets.sendStringPrintln(theShop.getItem(name));
 
 	}
+	
+	/**
+	 * Communicates a sessionID to the client side
+	 * Invokes a method to output the items in the inventory to the client side
+	 */
 	public void listAllItems() {
 		customerSockets.sendString(sessionID);
 		theShop.listAllItems(customerSockets);
 	}
 
+	/**
+	 * Invokes the menu() function after the client is deployed to the server
+	 */
 	@Override
 	public void run() {
 		
