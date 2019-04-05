@@ -73,7 +73,6 @@ public class ToolShopClient implements SessionID {
 			e.printStackTrace();
 		} finally {
 			try {
-				clientSockets.getStdIn().close();
 				clientSockets.getASocket().close();
 				clientSockets.getSocketOut().close();
 			} catch (IOException e) {
