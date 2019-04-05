@@ -83,7 +83,7 @@ public class ToolShopClient implements SessionID {
 
 	public static void main(String[] args) throws UnknownHostException, InterruptedException {
 
-		ToolShopClient toolShopClient = new ToolShopClient("10.13.77.106", 8099);
+		ToolShopClient toolShopClient = new ToolShopClient("10.13.124.143", 8099);
 		toolShopClient.communicateServer();
 	}
 
