@@ -78,9 +78,9 @@ public class ServerController implements Runnable, SessionID {
 	}
 
 	/**
-	 * 
-	 * @return
-	 * @throws SQLException
+	 * Creates the supplier list from the database
+	 * @return ArrayList<Supplier>: returns the list of suppliers 
+	 * @throws SQLException: throws any SQL exceptions
 	 */
 	public ArrayList<Supplier> processSupplierResult() throws SQLException
 	{
@@ -95,9 +95,9 @@ public class ServerController implements Runnable, SessionID {
 	}
 	
 	/**
-	 * 
-	 * @return
-	 * @throws SQLException
+	 * Creates the inventory list from the database
+	 * @return Inventory: returns an object of type inventory
+	 * @throws SQLException: throws any SQL exceptions
 	 */
 	public Inventory processItemResult() throws SQLException
 	{
